@@ -1,0 +1,1468 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" data-theme="light">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Parent & Student Dashboard | Kids Robotics & Coding Summer Camp 2026</title>
+  <meta name="description"
+    content="Personalized parent portal for Kids Robotics & Coding Summer Camp: enroll children in sessions, monitor learning progress, view earned badges, review projects, and track attendance.">
+
+  <!-- Favicon & Fonts -->
+  <link rel="icon" type="image/svg+xml"
+    href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%230b462c'><path d='M12 2a2 2 0 0 1 2 2c0 .74-.4 1.39-1 1.73V7h1a7 7 0 0 1 7 7h1a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-1v1a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-1H2a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1h1a7 7 0 0 1 7-7h1V5.73c-.6-.34-1-.99-1-1.73a2 2 0 0 1 2-2z'/></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet">
+
+  <!-- Core & Dashboard Styles -->
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/dashboard.css">
+</head>
+
+<body>
+  <!-- Mobile Sidebar Backdrop -->
+  <div class="dash-sidebar-backdrop" id="userSidebarBackdrop"></div>
+
+  <div class="dash-shell">
+    <!-- ======================================================================
+         SIDEBAR NAVIGATION
+         ====================================================================== -->
+    <aside class="dash-sidebar" id="userSidebar">
+      <div class="dash-sidebar-header">
+        <a href="index.html" class="dash-brand-link" title="Return to Main Website">
+          <div class="dash-brand-badge">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+              <path
+                d="M12 2a2 2 0 0 1 2 2c0 .74-.4 1.39-1 1.73V7h1a7 7 0 0 1 7 7h1a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-1v1a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-1H2a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1h1a7 7 0 0 1 7-7h1V5.73c-.6-.34-1-.99-1-1.73a2 2 0 0 1 2-2zM7.5 13a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zm9 0a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zM10 18h4v1h-4v-1z" />
+            </svg>
+          </div>
+          <div class="dash-brand-titles">
+            <div class="dash-brand-name">Nex<span>Bots</span></div>
+            <div class="dash-portal-tag">CAMP 2026 • PARENT PORTAL</div>
+          </div>
+        </a>
+
+        <button type="button" class="dash-sidebar-close" id="userSidebarClose" aria-label="Close Sidebar" title="Close Sidebar">&times;</button>
+        <div class="dash-portal-role-banner">
+          <span>Parent Family Account</span>
+          <span class="dash-role-pill">Parent</span>
+        </div>
+      </div>
+
+      <nav class="dash-sidebar-nav">
+        <div class="dash-nav-category">My Family</div>
+        <button type="button" class="dash-nav-item active" data-tab="tab-parent-overview">
+          <span class="dash-nav-icon" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><path d="M9 22V12h6v10"></path></svg></span>
+          <span class="dash-nav-label">Family Overview</span>
+        </button>
+        <button type="button" class="dash-nav-item" data-tab="tab-enroll">
+          <span class="dash-nav-icon" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="8.5" cy="7" r="4"></circle><line x1="20" y1="8" x2="20" y2="14"></line><line x1="23" y1="11" x2="17" y2="11"></line></svg></span>
+          <span class="dash-nav-label">Enroll Child in Camp</span>
+          <span class="dash-nav-badge">New</span>
+        </button>
+        <button type="button" class="dash-nav-item" data-tab="tab-status">
+          <span class="dash-nav-icon" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path><rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect><line x1="9" y1="12" x2="15" y2="12"></line><line x1="9" y1="16" x2="15" y2="16"></line></svg></span>
+          <span class="dash-nav-label">Enrollment Status</span>
+          <span class="dash-nav-badge" id="userPendingBadge">2</span>
+        </button>
+        <button type="button" class="dash-nav-item" data-tab="tab-children">
+          <span class="dash-nav-icon" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg></span>
+          <span class="dash-nav-label">Child Profiles</span>
+        </button>
+
+        <div class="dash-nav-category">Learning Progress</div>
+        <button type="button" class="dash-nav-item" data-tab="tab-journey">
+          <span class="dash-nav-icon" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg></span>
+          <span class="dash-nav-label">Learning Journey</span>
+        </button>
+        <button type="button" class="dash-nav-item" data-tab="tab-badges">
+          <span class="dash-nav-icon" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="7"></circle><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline></svg></span>
+          <span class="dash-nav-label">Badges Cabinet</span>
+        </button>
+        <button type="button" class="dash-nav-item" data-tab="tab-portfolio">
+          <span class="dash-nav-icon" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg></span>
+          <span class="dash-nav-label">Project Portfolio</span>
+        </button>
+        <button type="button" class="dash-nav-item" data-tab="tab-schedule">
+          <span class="dash-nav-icon" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg></span>
+          <span class="dash-nav-label">Schedule & Attendance</span>
+        </button>
+        <button type="button" class="dash-nav-item" data-tab="tab-feedback">
+          <span class="dash-nav-icon" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg></span>
+          <span class="dash-nav-label">Mentor Notes & News</span>
+        </button>
+      </nav>
+
+      <div class="dash-sidebar-footer">
+        <div class="dash-user-card">
+          <div class="dash-user-avatar">SA</div>
+          <div class="dash-user-meta">
+            <strong>Sarah Adeyemi</strong>
+            <span>2 Registered Campers</span>
+          </div>
+        </div>
+        <button type="button" class="dash-top-btn" id="btnUserResetData"
+          style="width:100%; justify-content:center; margin-bottom: 0.5rem; background: rgba(255,255,255,0.06); color: #cbd5ce; border-color: rgba(255,255,255,0.15);">
+          Reset Demo Data
+        </button>
+        <a href="admin-dashboard.html" class="dash-portal-switch-btn" title="Switch to Admin Dashboard">
+          <span>Switch to Admin Dashboard</span> <span>➔</span>
+        </a>
+        <a href="index.html" class="dash-top-btn"
+          style="width:100%; justify-content:center; background:transparent; color:#cbd5ce; border-color:rgba(255,255,255,0.15);">
+          Return to Website
+        </a>
+      </div>
+    </aside>
+
+    <!-- ======================================================================
+         MAIN CONTENT AREA
+         ====================================================================== -->
+    <main class="dash-main">
+      <!-- Top Navigation Bar -->
+      <header class="dash-topbar">
+        <div class="dash-topbar-left">
+          <button type="button" class="dash-menu-toggle" id="userMenuToggle" aria-label="Toggle Navigation Menu" title="Toggle Navigation Menu">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="3" y1="6" x2="21" y2="6"></line>
+              <line x1="3" y1="12" x2="21" y2="12"></line>
+              <line x1="3" y1="18" x2="21" y2="18"></line>
+            </svg>
+          </button>
+          <div class="dash-breadcrumb">
+            <h1 class="dash-page-title" id="userPageTitle">
+              <span id="userPageMainTitle">Welcome, Sarah Adeyemi</span>
+              <span id="userPageSubTitle" style="font-size: 0.88rem; font-weight: 700; color: var(--color-green-primary);">• Family Overview</span>
+            </h1>
+          </div>
+        </div>
+
+        <div class="dash-topbar-right">
+          <button type="button" class="dash-top-btn" id="userThemeToggleBtn" title="Toggle Light / Dark Mode">
+            <span id="userThemeLabel">Theme</span>
+          </button>
+
+          <button type="button" class="dash-top-btn" id="userRtlToggleBtn" title="Toggle RTL Direction">
+            <span>RTL</span>
+          </button>
+        </div>
+      </header>
+
+      <!-- Dashboard Content View Area -->
+      <div class="dash-content">
+
+        <!-- Prominent Welcome Message Banner -->
+        <div class="dash-welcome-bar">
+          <div class="dash-welcome-bar-left">
+            <span class="dash-welcome-portal-badge">PARENT & STUDENT LEARNING PORTAL</span>
+            <h2 class="dash-welcome-heading">Welcome back, <span>Sarah Adeyemi</span>!</h2>
+            <p class="dash-welcome-sub">
+              CodeCampus International Kids Robotics & Coding Summer Camp 2026 • Monitoring progress for Liam (Age 8) and Maya (Age 11)
+            </p>
+          </div>
+          <div class="dash-welcome-bar-right">
+            <div class="dash-welcome-chip">
+              <span>Camp Session:</span>
+              <strong>Cohort 1 (June 15 – June 26)</strong>
+            </div>
+            <div class="dash-welcome-chip">
+              <span>Campus Venue:</span>
+              <strong>Turing Robotics Lab, Abuja</strong>
+            </div>
+          </div>
+        </div>
+
+        <!-- ==================================================================
+             VIEW 1: PARENT OVERVIEW & LEARNING SUMMARY
+             ================================================================== -->
+        <section class="dash-tab-pane active" id="tab-parent-overview">
+          <!-- Hero Banner -->
+          <div class="dash-hero-card">
+            <div class="dash-hero-content">
+              <div class="dash-hero-badge">
+                <span class="pulse-dot"></span>
+                <span>Summer 2026 Ready • Turing Campus, Abuja</span>
+              </div>
+              <h2 class="dash-hero-title">Empowering Young Minds in <span>Robotics & Coding</span></h2>
+              <p class="dash-hero-desc">
+                Track your children’s milestone completions, explore upcoming robotics lab sessions, award achievements,
+                and enroll in age-appropriate summer tracks (Ages 4–6, 7–9, 10–13).
+              </p>
+              <div class="dash-hero-actions">
+                <button type="button" class="dash-hero-btn dash-hero-btn-primary" onclick="switchUserTab('tab-enroll')">
+                  <span>Enroll Another Child</span> <span>➔</span>
+                </button>
+                <button type="button" class="dash-hero-btn dash-hero-btn-outline" onclick="switchUserTab('tab-status')">
+                  <span>View Enrollment Status</span>
+                </button>
+              </div>
+            </div>
+
+            <div class="dash-hero-stats-pill">
+              <div class="dash-pill-row">
+                <span>Active Child Focus:</span>
+                <strong id="heroActiveChildName">Liam Adeyemi (Age 8)</strong>
+              </div>
+              <div class="dash-pill-row">
+                <span>Current Track:</span>
+                <strong id="heroActiveChildTrack">Creative Coders (7–9)</strong>
+              </div>
+              <div class="dash-pill-row">
+                <span>Next Session:</span>
+                <strong>Monday, June 15 • 9:00 AM</strong>
+              </div>
+              <div class="dash-pill-row">
+                <span>Turing Lab Room:</span>
+                <strong style="color: var(--color-yellow-bright);">Robotics Lab 2</strong>
+              </div>
+            </div>
+          </div>
+
+          <!-- Quick Summary Metrics (Clean without emoji icons) -->
+          <div class="dash-kpi-grid">
+            <div class="dash-kpi-card">
+              <div class="dash-kpi-info">
+                <span class="dash-kpi-label">Registered Children</span>
+                <span class="dash-kpi-value" id="kpiUserKidsCount">2</span>
+                <span class="dash-kpi-sub highlight">Liam (8) & Maya (11)</span>
+              </div>
+            </div>
+
+            <div class="dash-kpi-card">
+              <div class="dash-kpi-info">
+                <span class="dash-kpi-label">Curriculum Progress</span>
+                <span class="dash-kpi-value" id="kpiActiveProgress">78%</span>
+                <span class="dash-kpi-sub">Sensor & Logic Modules</span>
+              </div>
+            </div>
+
+            <div class="dash-kpi-card">
+              <div class="dash-kpi-info">
+                <span class="dash-kpi-label">Skill Badges Earned</span>
+                <span class="dash-kpi-value" id="kpiActiveBadges">4</span>
+                <span class="dash-kpi-sub highlight">Rocket Coder & Builder</span>
+              </div>
+            </div>
+
+            <div class="dash-kpi-card">
+              <div class="dash-kpi-info">
+                <span class="dash-kpi-label">Camp Attendance</span>
+                <span class="dash-kpi-value" id="kpiActiveAttendance">95%</span>
+                <span class="dash-kpi-sub">19 of 20 Sessions Attended</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Active Child Focus Spotlight Row -->
+          <div class="dash-analytics-row">
+            <!-- Left: Current Learning Journey & Milestones -->
+            <div class="dash-card">
+              <div class="dash-card-header">
+                <div>
+                  <h3 class="dash-card-title">Active Curriculum Milestones</h3>
+                  <p class="dash-card-sub" id="overviewMilestoneSubtitle">Liam Adeyemi • Creative Coders & Builders</p>
+                </div>
+                <button type="button" class="dash-action-btn view" onclick="switchUserTab('tab-journey')">Full
+                  Syllabus</button>
+              </div>
+
+              <div id="overviewMilestonesList" class="dash-prog-bar-group">
+                <!-- Dynamically rendered milestones -->
+              </div>
+            </div>
+
+            <!-- Right: Next Session Alert & Mentor Feedback -->
+            <div class="dash-card">
+              <div class="dash-card-header">
+                <div>
+                  <h3 class="dash-card-title">Mentor Commendation</h3>
+                  <p class="dash-card-sub">Latest feedback from robotics lead</p>
+                </div>
+                <span class="dash-status-badge approved">Faculty Verified</span>
+              </div>
+
+              <div
+                style="background: #fff9e6; border: 1.5px solid #fde68a; border-radius: 14px; padding: 1.25rem; margin-bottom: 1.25rem;">
+                <div style="font-size: 0.8rem; font-weight: 800; color: #b45309; margin-bottom: 0.4rem;"
+                  id="overviewMentorName">
+                  Eng. David Okafor (Robotics Lead)
+                </div>
+                <p style="font-size: 0.86rem; color: #78350f; line-height: 1.5; font-style: italic;"
+                  id="overviewMentorQuote">
+                  "Liam showed brilliant creativity in today's autonomous rover challenge. He calibrated his turn angles
+                  perfectly and helped a classmate fix an infinite loop in their Scratch blocks!"
+                </p>
+              </div>
+
+              <div
+                style="padding: 1rem; border-radius: 12px; background: var(--color-green-subtle); border: 1px solid rgba(11, 70, 44, 0.15); display: flex; flex-direction: column; gap: 0.4rem;">
+                <div
+                  style="display: flex; justify-content: space-between; font-size: 0.78rem; font-weight: 700; color: var(--color-green-darkest);">
+                  <span>Assigned Lab Station:</span>
+                  <span>Turing Arena - Pod 4</span>
+                </div>
+                <div
+                  style="display: flex; justify-content: space-between; font-size: 0.78rem; font-weight: 700; color: var(--color-green-darkest);">
+                  <span>Hardware Kit:</span>
+                  <span>Makeblock mBot Neo #206</span>
+                </div>
+                <div
+                  style="display: flex; justify-content: space-between; font-size: 0.78rem; font-weight: 700; color: var(--color-green-darkest);">
+                  <span>Take-home USB Drive:</span>
+                  <span>Backed Up Daily</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==================================================================
+             VIEW 2: ENROLL CHILD IN CAMP (INTERACTIVE ENROLLMENT WORKFLOW)
+             ================================================================== -->
+        <section class="dash-tab-pane" id="tab-enroll">
+          <div class="dash-enrollment-card">
+            <div style="text-align: center; margin-bottom: 2rem;">
+              <span class="dash-hero-badge">Camp Registration • Summer 2026</span>
+              <h2 class="dash-hero-title" style="color: var(--color-green-darkest); font-size: 1.85rem;">
+                Enroll Your Child in <span>Summer Camp 2026</span>
+              </h2>
+              <p class="dash-hero-desc" style="color: var(--color-gray-600); max-width: 600px; margin: 0 auto;">
+                Select your child, choose the age-appropriate robotics and coding track, pick preferred session dates,
+                and submit your registration request directly to camp administration.
+              </p>
+            </div>
+
+            <form id="formEnrollChildWorkflow">
+              <!-- Step 1: Select or Add Child -->
+              <div style="margin-bottom: 1.75rem;">
+                <label class="dash-form-label" style="font-size: 0.92rem; margin-bottom: 0.65rem; display: block;">
+                  Step 1: Select Child to Enroll
+                </label>
+                <div class="dash-child-tabs" id="enrollChildSelectorGrid">
+                  <!-- Injected via JavaScript -->
+                </div>
+              </div>
+
+              <!-- Step 2: Choose Age-Appropriate Program Track -->
+              <div style="margin-bottom: 1.75rem;">
+                <label class="dash-form-label" style="font-size: 0.92rem; margin-bottom: 0.65rem; display: block;">
+                  Step 2: Choose Age-Appropriate Program Track
+                </label>
+                <div class="dash-track-selector-cards" id="enrollProgramSelectorGrid">
+                  <!-- Dynamically rendered radio-like cards -->
+                </div>
+                <input type="hidden" id="selectedEnrollTrackId" value="CREATIVE_CODERS">
+              </div>
+
+              <!-- Step 3: Session Dates & Slot Selection -->
+              <div class="dash-form-grid">
+                <div class="dash-form-group">
+                  <label class="dash-form-label">Step 3: Camp Cohort & Calendar Dates</label>
+                  <select id="enrollSessionSelect" class="dash-form-select" required>
+                    <option value="Session 1: June 15 – June 26, 2026">Session 1: June 15 – June 26, 2026 (Launchpad
+                      Cohort)</option>
+                    <option value="Session 2: July 6 – July 17, 2026">Session 2: July 6 – July 17, 2026 (Cyber Builders
+                      Cohort)</option>
+                    <option value="Session 3: July 20 – July 31, 2026">Session 3: July 20 – July 31, 2026 (Future
+                      Inventors Cohort)</option>
+                    <option value="Session 4: August 3 – August 14, 2026">Session 4: August 3 – August 14, 2026 (Robo
+                      Championship)</option>
+                  </select>
+                </div>
+
+                <div class="dash-form-group">
+                  <label class="dash-form-label">Preferred Time Slot</label>
+                  <select id="enrollTimeSlotSelect" class="dash-form-select" required>
+                    <option value="Morning Slot (9:00 AM – 12:30 PM)">Morning Slot (9:00 AM – 12:30 PM)</option>
+                    <option value="Afternoon Slot (1:30 PM – 5:00 PM)">Afternoon Slot (1:30 PM – 5:00 PM)</option>
+                    <option value="Full Day Immersion (9:00 AM – 5:00 PM)">Full Day Immersion (9:00 AM – 5:00 PM)
+                    </option>
+                  </select>
+                </div>
+              </div>
+
+              <!-- Step 4: Special Requirements & Logistics -->
+              <div class="dash-form-grid">
+                <div class="dash-form-group">
+                  <label class="dash-form-label">Laptop & Hardware Equipment</label>
+                  <select id="enrollLaptopSelect" class="dash-form-select">
+                    <option value="Provided by Parent">Child will bring personal laptop / iPad</option>
+                    <option value="Campus Lab Loaner">Request campus lab loaner laptop (Complimentary)</option>
+                  </select>
+                </div>
+
+                <div class="dash-form-group">
+                  <label class="dash-form-label">Emergency Phone Number</label>
+                  <input type="text" id="enrollEmergencyPhone" class="dash-form-input" value="+234 802 987 6543"
+                    required>
+                </div>
+
+                <div class="dash-form-group full-width">
+                  <label class="dash-form-label">Special Notes, Interests or Allergies</label>
+                  <textarea id="enrollNotes" class="dash-form-textarea" rows="2"
+                    placeholder="e.g. Mild peanut allergy, keen on arcade game development and robotic sensors..."></textarea>
+                </div>
+              </div>
+
+              <!-- Submit Button -->
+              <button type="submit" class="dash-hero-btn dash-hero-btn-primary"
+                style="width: 100%; justify-content: center; font-size: 1rem; padding: 0.9rem;">
+                Submit Camp Enrollment Request
+              </button>
+              <p
+                style="text-align: center; font-size: 0.75rem; color: var(--color-gray-600); margin-top: 0.75rem; line-height: 1.4;">
+                * Submitting stores your request in shared browser memory. The Camp Administrator will review and
+                confirm your child's seat.
+              </p>
+            </form>
+          </div>
+        </section>
+
+        <!-- ==================================================================
+             VIEW 3: ENROLLMENT STATUS TRACKING & VOUCHERS
+             ================================================================== -->
+        <section class="dash-tab-pane" id="tab-status">
+          <div class="dash-card">
+            <div class="dash-card-header">
+              <div>
+                <h2 class="dash-card-title">Camp Enrollment Status Tracking</h2>
+                <p class="dash-card-sub">Track registration review status, confirmed cohort placements, and official camp
+                  pass vouchers</p>
+              </div>
+              <button type="button" class="dash-hero-btn dash-hero-btn-primary" onclick="switchUserTab('tab-enroll')">
+                + New Registration
+              </button>
+            </div>
+
+            <!-- Enrollments Table -->
+            <div class="dash-table-container">
+              <table class="dash-table">
+                <thead>
+                  <tr>
+                    <th>Voucher Code</th>
+                    <th>Child Name</th>
+                    <th>Age Tier & Program Track</th>
+                    <th>Session & Time Slot</th>
+                    <th>Submission Date</th>
+                    <th>Approval Status</th>
+                    <th>Tuition Fee</th>
+                    <th>Pass / Action</th>
+                  </tr>
+                </thead>
+                <tbody id="userEnrollmentStatusTbody">
+                  <!-- Dynamically rendered -->
+                </tbody>
+              </table>
+            </div>
+
+            <div class="dash-empty-state" id="userStatusEmptyState" style="display: none;">
+              <span class="dash-empty-icon" style="font-size: 1rem; font-weight: 800; letter-spacing: 0.05em;">NO RECORDS</span>
+              <h4 class="dash-empty-title">No enrollment submissions found</h4>
+              <p class="dash-empty-desc">You have not submitted any enrollment requests yet. Click below to begin.</p>
+              <button type="button" class="dash-hero-btn dash-hero-btn-primary" onclick="switchUserTab('tab-enroll')">
+                Enroll a Child Now
+              </button>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==================================================================
+             VIEW 4: MY CHILDREN PROFILES
+             ================================================================== -->
+        <section class="dash-tab-pane" id="tab-children">
+          <div class="dash-card">
+            <div class="dash-card-header">
+              <div>
+                <h2 class="dash-card-title">My Children's Profiles</h2>
+                <p class="dash-card-sub">Manage student credentials, school records, medical notes, and camp track
+                  preferences</p>
+              </div>
+              <button type="button" class="dash-top-btn" id="btnOpenAddChildModal">
+                + Add Another Child Profile
+              </button>
+            </div>
+
+            <div class="dash-projects-grid" id="userChildrenCardsGrid">
+              <!-- Dynamically populated child cards -->
+            </div>
+          </div>
+        </section>
+
+        <!-- ==================================================================
+             VIEW 5: LEARNING JOURNEY & MILESTONES
+             ================================================================== -->
+        <section class="dash-tab-pane" id="tab-journey">
+          <div class="dash-card">
+            <div class="dash-card-header">
+              <div>
+                <h2 class="dash-card-title">Learning Journey & STEM Milestones</h2>
+                <p class="dash-card-sub" id="journeyChildSubtitle">Tracking competencies for Liam Adeyemi (Age 8)</p>
+              </div>
+              <span class="dash-status-badge approved" id="journeyTrackBadge">Creative Coders & Builders</span>
+            </div>
+
+            <!-- Progress Overall Meter -->
+            <div class="dash-journey-meter-box">
+              <div class="dash-journey-meter-header">
+                <span style="font-size: 1rem; color: var(--color-green-darkest);">Overall Summer Curriculum Completion</span>
+                <span style="font-size: 1.35rem; color: var(--color-green-primary);" id="journeyProgressValue">78%</span>
+              </div>
+              <div class="dash-progress-track" style="height: 14px;">
+                <div class="dash-progress-fill green" id="journeyProgressBar" style="width: 78%;"></div>
+              </div>
+            </div>
+
+            <!-- Milestones List -->
+            <h3 style="font-size: 1.15rem; font-weight: 800; color: var(--color-green-darkest); margin-bottom: 1rem;">
+              Curriculum Modules & Skill Checks
+            </h3>
+            <div id="journeyMilestonesContainer" class="dash-prog-bar-group" style="gap: 1.5rem;">
+              <!-- Dynamically populated -->
+            </div>
+
+            <!-- Acquired Skills Badges Row -->
+            <div style="margin-top: 2.5rem; padding-top: 1.5rem; border-top: 1px solid rgba(11, 70, 44, 0.1);">
+              <h4 style="font-size: 1rem; font-weight: 800; color: var(--color-green-darkest); margin-bottom: 0.75rem;">
+                Acquired Technical Skills & Competencies
+              </h4>
+              <div id="journeySkillsPills" style="display: flex; flex-wrap: wrap; gap: 0.6rem;">
+                <!-- Dynamically populated chips -->
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==================================================================
+             VIEW 6: SKILL BADGES & TROPHY CABINET
+             ================================================================== -->
+        <section class="dash-tab-pane" id="tab-badges">
+          <div class="dash-card">
+            <div class="dash-card-header">
+              <div>
+                <h2 class="dash-card-title">Skill Badges & Trophy Cabinet</h2>
+                <p class="dash-card-sub" id="badgesSubtitle">Official badges earned by Liam Adeyemi in robotics and
+                  coding lab</p>
+              </div>
+              <span class="dash-status-badge approved" id="badgesCountBadge">4 Badges Unlocked</span>
+            </div>
+
+            <div class="dash-badge-showcase-grid" id="userBadgesGrid">
+              <!-- Dynamically populated glowing cards -->
+            </div>
+          </div>
+        </section>
+
+        <!-- ==================================================================
+             VIEW 7: PROJECT PORTFOLIO
+             ================================================================== -->
+        <section class="dash-tab-pane" id="tab-portfolio">
+          <div class="dash-card">
+            <div class="dash-card-header">
+              <div>
+                <h2 class="dash-card-title">Student Project Showcase</h2>
+                <p class="dash-card-sub" id="portfolioSubtitle">Completed robots, Scratch arcade games, and IoT models</p>
+              </div>
+              <button type="button" class="dash-top-btn" id="btnOpenSubmitProjectModal">
+                + Submit New Project Build
+              </button>
+            </div>
+
+            <div class="dash-projects-grid" id="userProjectsGrid">
+              <!-- Dynamically populated projects -->
+            </div>
+          </div>
+        </section>
+
+        <!-- ==================================================================
+             VIEW 8: SCHEDULE & ATTENDANCE
+             ================================================================== -->
+        <section class="dash-tab-pane" id="tab-schedule">
+          <div class="dash-card">
+            <div class="dash-card-header">
+              <div>
+                <h2 class="dash-card-title">Daily Camp Schedule & Attendance Records</h2>
+                <p class="dash-card-sub" id="scheduleSubtitle">Session timetable and physical campus attendance logs</p>
+              </div>
+            </div>
+
+            <div class="dash-table-container">
+              <table class="dash-table">
+                <thead>
+                  <tr>
+                    <th>Day / Date</th>
+                    <th>Session Topic</th>
+                    <th>Lab Arena</th>
+                    <th>Time Slot</th>
+                    <th>Instructor</th>
+                    <th>Attendance Status</th>
+                  </tr>
+                </thead>
+                <tbody id="userScheduleTbody">
+                  <!-- Dynamically populated schedule -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==================================================================
+             VIEW 9: MENTOR NOTES & CAMP ANNOUNCEMENTS
+             ================================================================== -->
+        <section class="dash-tab-pane" id="tab-feedback">
+          <div class="dash-analytics-row">
+            <!-- Left: Live Bulletins from Camp Admin -->
+            <div class="dash-card">
+              <div class="dash-card-header">
+                <div>
+                  <h3 class="dash-card-title">Camp Announcements</h3>
+                  <p class="dash-card-sub">Official campus updates synced in real-time</p>
+                </div>
+              </div>
+
+              <div id="userAnnouncementsList" style="display: flex; flex-direction: column; gap: 1rem;">
+                <!-- Dynamically rendered -->
+              </div>
+            </div>
+
+            <!-- Right: Submit Inquiry to Admin -->
+            <div class="dash-card">
+              <div class="dash-card-header">
+                <div>
+                  <h3 class="dash-card-title">Message Camp Mentors</h3>
+                  <p class="dash-card-sub">Have a question regarding equipment or dietary needs?</p>
+                </div>
+              </div>
+
+              <form id="formSendParentEnquiry">
+                <div class="dash-form-group" style="margin-bottom: 1rem;">
+                  <label class="dash-form-label">Subject</label>
+                  <input type="text" id="parentEnquirySubject" class="dash-form-input"
+                    placeholder="e.g. Question about bring-your-own laptop policy" required>
+                </div>
+
+                <div class="dash-form-group" style="margin-bottom: 1.25rem;">
+                  <label class="dash-form-label">Message</label>
+                  <textarea id="parentEnquiryMessage" class="dash-form-textarea" rows="4"
+                    placeholder="Type your message to camp administration here..." required></textarea>
+                </div>
+
+                <button type="submit" class="dash-hero-btn dash-hero-btn-primary" style="width: 100%;">
+                  Send Message to Administration
+                </button>
+              </form>
+
+              <!-- Existing Queries -->
+              <div style="margin-top: 1.5rem; padding-top: 1.25rem; border-top: 1px solid rgba(11, 70, 44, 0.1);">
+                <h4 style="font-size: 0.9rem; font-weight: 800; color: var(--color-green-darkest); margin-bottom: 0.75rem;">
+                  My Previous Inquiries
+                </h4>
+                <div id="userPreviousEnquiriesList" style="display: flex; flex-direction: column; gap: 0.75rem;">
+                  <!-- Injected via JavaScript -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+      </div>
+    </main>
+  </div>
+
+  <!-- ======================================================================
+       MODALS: ADD CHILD, SUBMIT PROJECT, VIEW VOUCHER
+       ====================================================================== -->
+  <!-- Add Child Profile Modal -->
+  <div class="dash-modal-backdrop" id="modalAddChild">
+    <div class="dash-modal-box">
+      <div class="dash-modal-header">
+        <h3 class="dash-modal-title">+ Add Child Profile</h3>
+        <button type="button" class="dash-modal-close" onclick="closeAddChildModal()">&times;</button>
+      </div>
+      <div class="dash-modal-body">
+        <form id="formAddChild">
+          <div class="dash-form-grid">
+            <div class="dash-form-group">
+              <label class="dash-form-label">Child's Full Name</label>
+              <input type="text" id="newChildName" class="dash-form-input" placeholder="e.g. Lucas Adeyemi" required>
+            </div>
+            <div class="dash-form-group">
+              <label class="dash-form-label">Age</label>
+              <input type="number" id="newChildAge" class="dash-form-input" min="4" max="14" value="7" required>
+            </div>
+          </div>
+
+          <div class="dash-form-grid">
+            <div class="dash-form-group">
+              <label class="dash-form-label">Gender</label>
+              <select id="newChildGender" class="dash-form-select">
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+            <div class="dash-form-group">
+              <label class="dash-form-label">Current School</label>
+              <input type="text" id="newChildSchool" class="dash-form-input" placeholder="e.g. Abuja International Academy">
+            </div>
+          </div>
+
+          <div class="dash-form-group" style="margin-bottom: 1rem;">
+            <label class="dash-form-label">Preferred Program Track</label>
+            <select id="newChildTrack" class="dash-form-select">
+              <option value="TINY_TECH|Tiny Tech Adventurers (Ages 4–6)">Tiny Tech Adventurers (Ages 4–6)</option>
+              <option value="CREATIVE_CODERS|Creative Coders & Builders (Ages 7–9)" selected>Creative Coders & Builders
+                (Ages 7–9)</option>
+              <option value="JUNIOR_ENGINEERS|Junior Engineers & Python Pros (Ages 10–13)">Junior Engineers & Python Pros
+                (Ages 10–13)</option>
+            </select>
+          </div>
+
+          <div class="dash-form-group" style="margin-bottom: 1.25rem;">
+            <label class="dash-form-label">Allergies or Dietary Restrictions</label>
+            <input type="text" id="newChildAllergies" class="dash-form-input" placeholder="e.g. No allergies, or mild dairy restriction">
+          </div>
+
+          <button type="submit" class="dash-hero-btn dash-hero-btn-primary" style="width: 100%;">
+            Save Child Profile
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Submit Project Modal -->
+  <div class="dash-modal-backdrop" id="modalSubmitProject">
+    <div class="dash-modal-box">
+      <div class="dash-modal-header">
+        <h3 class="dash-modal-title">+ Submit Capstone Project</h3>
+        <button type="button" class="dash-modal-close" onclick="closeSubmitProjectModal()">&times;</button>
+      </div>
+      <div class="dash-modal-body">
+        <form id="formSubmitProject">
+          <div class="dash-form-group" style="margin-bottom: 1rem;">
+            <label class="dash-form-label">Project Title</label>
+            <input type="text" id="projTitle" class="dash-form-input" placeholder="e.g. Smart Line-Following Robot" required>
+          </div>
+
+          <div class="dash-form-grid">
+            <div class="dash-form-group">
+              <label class="dash-form-label">Category</label>
+              <select id="projCat" class="dash-form-select">
+                <option value="Robotics & Sensors">Robotics & Sensors</option>
+                <option value="Game Development">Game Development</option>
+                <option value="Python & IoT Automation">Python & IoT Automation</option>
+                <option value="STEM Invention">STEM Invention</option>
+              </select>
+            </div>
+            <div class="dash-form-group">
+              <label class="dash-form-label">Hardware & Software Tools</label>
+              <input type="text" id="projTools" class="dash-form-input" placeholder="e.g. mBot Neo, Scratch 3.0, Ultrasonic Sensor" required>
+            </div>
+          </div>
+
+          <div class="dash-form-group" style="margin-bottom: 1.25rem;">
+            <label class="dash-form-label">Project Description</label>
+            <textarea id="projDesc" class="dash-form-textarea" rows="3"
+              placeholder="Describe what your child built, challenges solved, and how it works..." required></textarea>
+          </div>
+
+          <button type="submit" class="dash-hero-btn dash-hero-btn-primary" style="width: 100%;">
+            Submit for Faculty Review & Grading
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Camp Voucher Pass Modal -->
+  <div class="dash-modal-backdrop" id="modalVoucherPass">
+    <div class="dash-modal-box" style="max-width: 500px; text-align: center;">
+      <div class="dash-modal-header" style="background: linear-gradient(135deg, #062b1b 0%, #0b462c 100%); color: #ffffff;">
+        <h3 class="dash-modal-title" style="color: #ffffff;">Official Camp Pass Voucher</h3>
+        <button type="button" class="dash-modal-close" style="color: #ffffff;" onclick="closeVoucherModal()">&times;</button>
+      </div>
+      <div class="dash-modal-body" id="voucherModalContent" style="padding: 2rem 1.5rem;">
+        <!-- Injected via JavaScript -->
+      </div>
+      <div class="dash-modal-footer" style="justify-content: center;">
+        <button type="button" class="dash-hero-btn dash-hero-btn-primary" onclick="window.print()">
+          Print Voucher Pass
+        </button>
+        <button type="button" class="dash-top-btn" onclick="closeVoucherModal()">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Container -->
+  <div class="dash-toast-container" id="dashToastContainer"></div>
+
+  <!-- Script Files -->
+  <script src="assets/js/dashboard.js"></script>
+  <script>
+    // =========================================================================
+    // PARENT / USER DASHBOARD CONTROLLER (Pure Vanilla JavaScript)
+    // =========================================================================
+    let activeChildId = 'KID-101'; // Default active child
+
+    document.addEventListener('DOMContentLoaded', () => {
+      initUserNavigation();
+      initUserThemeAndRtl();
+      renderAllUserData();
+
+      // Listen for data sync events across tabs
+      window.addEventListener('campDataUpdated', () => {
+        renderAllUserData();
+      });
+
+      // Child Selector in Topbar
+      const activeChildSelect = document.getElementById('userActiveChildSelect');
+      if (activeChildSelect) {
+        activeChildSelect.addEventListener('change', (e) => {
+          activeChildId = e.target.value;
+          renderActiveChildViews();
+        });
+      }
+
+      // Reset Demo Data
+      document.getElementById('btnUserResetData').addEventListener('click', () => {
+        if (confirm('Reset demo camp database to fresh default state?')) {
+          window.CampStore.resetStore();
+          showToast('Demo camp data reset successfully!', 'success');
+          renderAllUserData();
+        }
+      });
+
+      // Enrollment Form Submission
+      document.getElementById('formEnrollChildWorkflow').addEventListener('submit', handleEnrollmentSubmit);
+
+      // Add Child Profile Modal Form
+      document.getElementById('btnOpenAddChildModal').addEventListener('click', () => {
+        document.getElementById('modalAddChild').classList.add('active');
+      });
+
+      document.getElementById('formAddChild').addEventListener('submit', (e) => {
+        e.preventDefault();
+        const name = document.getElementById('newChildName').value.trim();
+        const age = parseInt(document.getElementById('newChildAge').value, 10);
+        const gender = document.getElementById('newChildGender').value;
+        const school = document.getElementById('newChildSchool').value.trim();
+        const [trackId, trackName] = document.getElementById('newChildTrack').value.split('|');
+        const allergies = document.getElementById('newChildAllergies').value.trim() || 'None';
+
+        const newKid = window.CampStore.addChild({
+          name, age, gender, school, trackId, trackName, allergies,
+          avatar: name.split(' ').map(w => w[0]).join('').substring(0, 2).toUpperCase() || 'ST'
+        });
+
+        activeChildId = newKid.id;
+        showToast(`Created profile for ${name}!`, 'success');
+        closeAddChildModal();
+        e.target.reset();
+        renderAllUserData();
+      });
+
+      // Submit Project Modal Form
+      document.getElementById('btnOpenSubmitProjectModal').addEventListener('click', () => {
+        document.getElementById('modalSubmitProject').classList.add('active');
+      });
+
+      document.getElementById('formSubmitProject').addEventListener('submit', (e) => {
+        e.preventDefault();
+        const title = document.getElementById('projTitle').value.trim();
+        const category = document.getElementById('projCat').value;
+        const tools = document.getElementById('projTools').value.trim();
+        const desc = document.getElementById('projDesc').value.trim();
+
+        window.CampStore.addProjectToStudent(activeChildId, { title, category, tools, desc });
+        showToast('Project build submitted for faculty grading!', 'success');
+        closeSubmitProjectModal();
+        e.target.reset();
+        renderActiveChildViews();
+      });
+
+      // Parent Enquiry Form
+      document.getElementById('formSendParentEnquiry').addEventListener('submit', (e) => {
+        e.preventDefault();
+        const subject = document.getElementById('parentEnquirySubject').value.trim();
+        const message = document.getElementById('parentEnquiryMessage').value.trim();
+
+        window.CampStore.addEnquiry({
+          parentName: 'Sarah Adeyemi',
+          email: 'sarah.adeyemi@example.com',
+          subject, message
+        });
+
+        showToast('Message sent to Camp Administration!', 'success');
+        e.target.reset();
+        renderUserEnquiries();
+      });
+    });
+
+    // -------------------------------------------------------------------------
+    // NAVIGATION & TAB SWITCHING
+    // -------------------------------------------------------------------------
+    function initUserNavigation() {
+      const navItems = document.querySelectorAll('.dash-nav-item');
+      const panes = document.querySelectorAll('.dash-tab-pane');
+      const pageTitle = document.getElementById('userPageTitle');
+      const subTitle = document.getElementById('userPageSubTitle');
+
+      const titleMap = {
+        'tab-parent-overview': 'Family Overview',
+        'tab-enroll': 'Camp Session Enrollment Workflow',
+        'tab-status': 'Camp Enrollment Status & Passes',
+        'tab-children': 'My Registered Children',
+        'tab-journey': 'Learning Journey & STEM Competencies',
+        'tab-badges': 'Skill Badges & Trophy Showcase',
+        'tab-portfolio': 'Student Project Portfolio',
+        'tab-schedule': 'Session Schedule & Attendance Logs',
+        'tab-feedback': 'Mentor Feedback & Campus Bulletins'
+      };
+
+      navItems.forEach(item => {
+        item.addEventListener('click', () => {
+          const tabId = item.getAttribute('data-tab');
+          if (!tabId) return;
+
+          navItems.forEach(n => n.classList.remove('active'));
+          item.classList.add('active');
+
+          panes.forEach(p => p.classList.remove('active'));
+          const target = document.getElementById(tabId);
+          if (target) target.classList.add('active');
+
+          if (pageTitle) {
+            const mainTitle = document.getElementById('userPageMainTitle');
+            if (mainTitle) {
+              mainTitle.textContent = 'Welcome, Sarah Adeyemi';
+            } else {
+              pageTitle.textContent = 'Welcome, Sarah Adeyemi';
+            }
+          }
+          if (subTitle && titleMap[tabId]) subTitle.textContent = '• ' + titleMap[tabId];
+
+          // Close mobile drawer
+          document.getElementById('userSidebar').classList.remove('open');
+          document.getElementById('userSidebarBackdrop').classList.remove('open');
+        });
+      });
+
+      // Mobile Menu Toggle & Close
+      const toggle = document.getElementById('userMenuToggle');
+      const closeBtn = document.getElementById('userSidebarClose');
+      const sidebar = document.getElementById('userSidebar');
+      const backdrop = document.getElementById('userSidebarBackdrop');
+
+      toggle.addEventListener('click', () => {
+        sidebar.classList.toggle('open');
+        backdrop.classList.toggle('open');
+      });
+
+      if (closeBtn) {
+        closeBtn.addEventListener('click', () => {
+          sidebar.classList.remove('open');
+          backdrop.classList.remove('open');
+        });
+      }
+
+      backdrop.addEventListener('click', () => {
+        sidebar.classList.remove('open');
+        backdrop.classList.remove('open');
+      });
+    }
+
+    function switchUserTab(tabId) {
+      const navItem = document.querySelector(`.dash-nav-item[data-tab="${tabId}"]`);
+      if (navItem) navItem.click();
+    }
+
+    // -------------------------------------------------------------------------
+    // THEME & RTL CONTROLLER
+    // -------------------------------------------------------------------------
+    function initUserThemeAndRtl() {
+      const html = document.documentElement;
+      const themeBtn = document.getElementById('userThemeToggleBtn');
+      const themeLabel = document.getElementById('userThemeLabel');
+      const rtlBtn = document.getElementById('userRtlToggleBtn');
+
+      function updateThemeLabelText(theme) {
+        if (!themeLabel) return;
+        const isMobile = window.innerWidth <= 480;
+        if (isMobile) {
+          themeLabel.textContent = theme === 'dark' ? 'Dark' : 'Light';
+        } else {
+          themeLabel.textContent = theme === 'dark' ? 'Theme: Dark' : 'Theme: Light';
+        }
+      }
+
+      const savedTheme = localStorage.getItem('camp_theme') || 'light';
+      html.setAttribute('data-theme', savedTheme);
+      updateThemeLabelText(savedTheme);
+
+      window.addEventListener('resize', () => {
+        updateThemeLabelText(html.getAttribute('data-theme') || 'light');
+      });
+
+      themeBtn.addEventListener('click', () => {
+        const current = html.getAttribute('data-theme');
+        const next = current === 'dark' ? 'light' : 'dark';
+        html.setAttribute('data-theme', next);
+        localStorage.setItem('camp_theme', next);
+        updateThemeLabelText(next);
+      });
+
+      const savedDir = localStorage.getItem('camp_direction') || 'ltr';
+      html.setAttribute('dir', savedDir);
+
+      rtlBtn.addEventListener('click', () => {
+        const current = html.getAttribute('dir');
+        const next = current === 'rtl' ? 'ltr' : 'rtl';
+        html.setAttribute('dir', next);
+        localStorage.setItem('camp_direction', next);
+      });
+    }
+
+    // -------------------------------------------------------------------------
+    // DATA RENDERING
+    // -------------------------------------------------------------------------
+    function renderAllUserData() {
+      const store = window.CampStore.getStore();
+      const children = store.children || [];
+      const enrollments = store.enrollments || [];
+      const parentEnrollments = enrollments.filter(e => e.parentEmail === 'sarah.adeyemi@example.com' || e.parentName === 'Sarah Adeyemi');
+
+      // Update counters
+      const pendingCount = parentEnrollments.filter(e => e.status === 'Pending').length;
+      const uPendingBadge = document.getElementById('userPendingBadge');
+      if (uPendingBadge) uPendingBadge.textContent = pendingCount;
+      const uNoticeBadge = document.getElementById('userNoticeBadge');
+      if (uNoticeBadge) uNoticeBadge.textContent = pendingCount;
+      const uKidsKpi = document.getElementById('kpiUserKidsCount');
+      if (uKidsKpi) uKidsKpi.textContent = children.length;
+
+      // Render Child Selectors in Enrollment step if selector exists
+      const select = document.getElementById('userActiveChildSelect');
+      if (select) {
+        select.innerHTML = children.map(c => `
+          <option value="${c.id}" ${c.id === activeChildId ? 'selected' : ''}>
+            ${escapeHtml(c.name)} (Age ${c.age})
+          </option>
+        `).join('');
+      }
+
+      renderEnrollStepChildPills();
+      renderEnrollStepProgramCards();
+      renderActiveChildViews();
+      renderUserEnrollmentsStatusTable();
+      renderUserAnnouncements();
+      renderUserEnquiries();
+    }
+
+    function renderActiveChildViews() {
+      const store = window.CampStore.getStore();
+      const child = (store.children || []).find(c => c.id === activeChildId) || (store.children || [])[0];
+      if (!child) return;
+
+      // Update Topbar and Overview Hero Spotlight
+      document.getElementById('heroActiveChildName').textContent = `${child.name} (Age ${child.age})`;
+      document.getElementById('heroActiveChildTrack').textContent = child.trackName || 'Robotics & Coding Track';
+      document.getElementById('kpiActiveProgress').textContent = `${child.progressPct || 0}%`;
+      document.getElementById('kpiActiveBadges').textContent = (child.badges || []).length;
+      document.getElementById('kpiActiveAttendance').textContent = `${child.attendancePct || 95}%`;
+
+      document.getElementById('overviewMilestoneSubtitle').textContent = `${child.name} • ${child.trackName || 'Summer Track'}`;
+      document.getElementById('overviewMentorName').textContent = child.instructor || 'Lead Mentor';
+      document.getElementById('overviewMentorQuote').textContent = `"${child.mentorFeedback || 'Showing great dedication and problem-solving!'}"`;
+
+      // Overview Milestones List
+      const mList = document.getElementById('overviewMilestonesList');
+      mList.innerHTML = (child.milestones || []).map(m => `
+        <div class="dash-prog-item">
+          <div class="dash-prog-labels">
+            <span class="title">${escapeHtml(m.title)}</span>
+            <span class="stats">${m.pct}% • ${m.status}</span>
+          </div>
+          <div class="dash-progress-track">
+            <div class="dash-progress-fill ${m.pct === 100 ? 'green' : (m.pct > 50 ? 'yellow' : 'orange')}" style="width: ${m.pct}%;"></div>
+          </div>
+        </div>
+      `).join('');
+
+      // Children Profiles View
+      renderChildrenProfilesGrid();
+
+      // Learning Journey View
+      document.getElementById('journeyChildSubtitle').textContent = `Tracking competencies for ${child.name} (Age ${child.age})`;
+      document.getElementById('journeyTrackBadge').textContent = child.trackName || 'Camp Track';
+      document.getElementById('journeyProgressValue').textContent = `${child.progressPct || 0}%`;
+      document.getElementById('journeyProgressBar').style.width = `${child.progressPct || 0}%`;
+
+      const jContainer = document.getElementById('journeyMilestonesContainer');
+      jContainer.innerHTML = (child.milestones || []).map(m => `
+        <div class="dash-prog-item">
+          <div class="dash-prog-labels" style="font-size: 0.9rem;">
+            <span class="title"><span class="dash-status-badge ${m.status === 'Completed' ? 'approved' : 'pending'}" style="margin-right: 6px; padding: 2px 8px; font-size: 0.72rem;">${m.status}</span> ${escapeHtml(m.title)}</span>
+            <span class="stats" style="font-weight: 800; color: var(--color-green-primary);">${m.pct}% Complete</span>
+          </div>
+          <div class="dash-progress-track" style="height: 12px;">
+            <div class="dash-progress-fill ${m.pct === 100 ? 'green' : (m.pct > 50 ? 'yellow' : 'orange')}" style="width: ${m.pct}%;"></div>
+          </div>
+        </div>
+      `).join('');
+
+      const jSkills = document.getElementById('journeySkillsPills');
+      jSkills.innerHTML = (child.skills || []).map(s => `
+        <span class="dash-project-tools" style="font-size: 0.8rem; background: var(--color-green-subtle); color: var(--color-green-darkest);">
+          ${escapeHtml(s.name)} <strong>(${escapeHtml(s.level)})</strong>
+        </span>
+      `).join('');
+
+      // Badges Cabinet
+      document.getElementById('badgesSubtitle').textContent = `Official badges earned by ${child.name} in robotics and coding lab`;
+      document.getElementById('badgesCountBadge').textContent = `${(child.badges || []).length} Badges Unlocked`;
+      const badgesGrid = document.getElementById('userBadgesGrid');
+      badgesGrid.innerHTML = (child.badges || []).map(b => `
+        <div class="dash-badge-card">
+          <div class="dash-badge-icon-wrap">${escapeHtml(b.badgeCode || b.name.split(' ').map(w => w[0]).join('').substring(0, 3).toUpperCase())}</div>
+          <h4 class="dash-badge-name">${escapeHtml(b.name)}</h4>
+          <p class="dash-badge-desc">${escapeHtml(b.desc)}</p>
+          <span class="dash-badge-date">Earned ${b.date}</span>
+        </div>
+      `).join('');
+
+      // Project Portfolio
+      document.getElementById('portfolioSubtitle').textContent = `Completed robots, Scratch arcade games, and IoT projects built by ${child.name}`;
+      const projGrid = document.getElementById('userProjectsGrid');
+      projGrid.innerHTML = (child.projects || []).map(p => `
+        <div class="dash-project-card">
+          <div class="dash-project-header">
+            <div>
+              <span class="dash-project-cat">${escapeHtml(p.category)}</span>
+              <h3 class="dash-project-title">${escapeHtml(p.title)}</h3>
+            </div>
+            <span class="dash-status-badge approved">${escapeHtml(p.grade || 'A+')}</span>
+          </div>
+          <div class="dash-project-tools">${escapeHtml(p.tools)}</div>
+          <p class="dash-project-desc">${escapeHtml(p.desc)}</p>
+          <div class="dash-project-feedback">
+            <strong>Mentor Commendation:</strong> "${escapeHtml(p.mentorNote)}"
+          </div>
+        </div>
+      `).join('');
+
+      // Schedule & Attendance View
+      document.getElementById('scheduleSubtitle').textContent = `Session timetable and physical campus attendance records for ${child.name}`;
+      renderChildScheduleTable(child);
+    }
+
+    function renderChildrenProfilesGrid() {
+      const store = window.CampStore.getStore();
+      const children = store.children || [];
+      const grid = document.getElementById('userChildrenCardsGrid');
+
+      grid.innerHTML = children.map(c => `
+        <div class="dash-card dash-child-profile-card" style="border: 2px solid ${c.id === activeChildId ? 'var(--color-green-primary)' : 'rgba(11, 70, 44, 0.12)'};">
+          <div class="dash-child-card-header">
+            <div style="display: flex; align-items: center; gap: 0.75rem;">
+              <div class="dash-user-avatar" style="width: 44px; height: 44px; font-size: 0.95rem; flex-shrink: 0;">${escapeHtml(c.avatar || 'ST')}</div>
+              <div>
+                <h3 style="font-size: 1.25rem; font-weight: 800; color: var(--color-green-darkest); margin-bottom: 0.2rem;">${escapeHtml(c.name)}</h3>
+                <span class="dash-status-badge upcoming">Age ${c.age} • ${c.gender || 'Child'}</span>
+              </div>
+            </div>
+            <span class="dash-status-badge approved">${c.progressPct || 0}% Progress</span>
+          </div>
+
+          <div style="font-size: 0.85rem; color: var(--color-gray-600); margin-bottom: 0.65rem;">
+            <strong>Track:</strong> ${escapeHtml(c.trackName || 'Creative Coders')}
+          </div>
+          <div style="font-size: 0.82rem; color: var(--color-gray-600); margin-bottom: 0.65rem;">
+            <strong>School:</strong> ${escapeHtml(c.school || 'Abuja Prep Academy')}
+          </div>
+          <div style="font-size: 0.82rem; color: var(--color-gray-600); margin-bottom: 0.85rem;">
+            <strong>Medical / Allergies:</strong> ${escapeHtml(c.allergies || 'None')}
+          </div>
+
+          <div class="dash-child-card-footer">
+            <button type="button" class="dash-hero-btn ${c.id === activeChildId ? 'dash-hero-btn-primary' : 'dash-hero-btn-outline'}" style="padding: 0.45rem 0.95rem; font-size: 0.8rem;" onclick="setActiveChild('${c.id}')">
+              ${c.id === activeChildId ? 'Active Focus Child' : 'Set as Focus Child'}
+            </button>
+            <span style="font-size: 0.78rem; font-weight: 700; color: var(--color-orange-golden);">${(c.badges || []).length} Badges Earned</span>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function setActiveChild(id) {
+      activeChildId = id;
+      const activeChildSelect = document.getElementById('userActiveChildSelect');
+      if (activeChildSelect) activeChildSelect.value = id;
+      renderActiveChildViews();
+      showToast('Switched active child context!', 'success');
+    }
+
+    function renderEnrollStepChildPills() {
+      const store = window.CampStore.getStore();
+      const children = store.children || [];
+      const grid = document.getElementById('enrollChildSelectorGrid');
+
+      grid.innerHTML = children.map(c => `
+        <button type="button" class="dash-child-tab-pill ${c.id === activeChildId ? 'active' : ''}" onclick="selectEnrollChild('${c.id}')">
+          <span>${escapeHtml(c.name)} (Age ${c.age})</span>
+        </button>
+      `).join('');
+    }
+
+    function selectEnrollChild(id) {
+      activeChildId = id;
+      renderEnrollStepChildPills();
+      const child = (window.CampStore.getStore().children || []).find(c => c.id === id);
+      if (child) {
+        // Auto-select age-appropriate program
+        if (child.age <= 6) selectEnrollTrack('TINY_TECH');
+        else if (child.age <= 9) selectEnrollTrack('CREATIVE_CODERS');
+        else selectEnrollTrack('JUNIOR_ENGINEERS');
+      }
+    }
+
+    function renderEnrollStepProgramCards() {
+      const store = window.CampStore.getStore();
+      const programs = store.programs || [];
+      const currentTrack = document.getElementById('selectedEnrollTrackId').value;
+      const grid = document.getElementById('enrollProgramSelectorGrid');
+
+      grid.innerHTML = programs.map(p => `
+        <div class="dash-track-radio-card ${p.id === currentTrack ? 'selected' : ''}" onclick="selectEnrollTrack('${p.id}')">
+          <span class="track-age-badge">${escapeHtml(p.ageGroup)}</span>
+          <div class="track-title">${escapeHtml(p.title)}</div>
+          <div style="font-size: 0.78rem; color: var(--color-gray-600); line-height: 1.35;">${escapeHtml(p.subtitle)}</div>
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-top: auto; padding-top: 0.5rem; border-top: 1px dashed rgba(11, 70, 44, 0.15);">
+            <span class="track-fee">${escapeHtml(p.fee)}</span>
+            <span style="font-size: 0.72rem; color: #10b981; font-weight: 700;">${p.capacity - p.enrolledCount} seats open</span>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function selectEnrollTrack(trackId) {
+      document.getElementById('selectedEnrollTrackId').value = trackId;
+      renderEnrollStepProgramCards();
+    }
+
+    function handleEnrollmentSubmit(e) {
+      e.preventDefault();
+      const store = window.CampStore.getStore();
+      const child = (store.children || []).find(c => c.id === activeChildId) || (store.children || [])[0];
+      const trackId = document.getElementById('selectedEnrollTrackId').value;
+      const prog = (store.programs || []).find(p => p.id === trackId);
+      const sessionName = document.getElementById('enrollSessionSelect').value;
+      const timeSlot = document.getElementById('enrollTimeSlotSelect').value;
+      const laptopNeed = document.getElementById('enrollLaptopSelect').value;
+      const emergencyPhone = document.getElementById('enrollEmergencyPhone').value.trim();
+      const notes = document.getElementById('enrollNotes').value.trim();
+
+      const newRecord = window.CampStore.addEnrollment({
+        childName: child ? child.name : 'Camper',
+        age: child ? child.age : 8,
+        parentName: 'Sarah Adeyemi',
+        parentEmail: 'sarah.adeyemi@example.com',
+        parentPhone: '+234 803 123 4567',
+        trackId: trackId,
+        trackName: prog ? `${prog.title} (${prog.ageGroup})` : 'Robotics Summer Camp',
+        sessionName: sessionName,
+        timeSlot: timeSlot,
+        laptopNeed: laptopNeed,
+        emergencyContact: emergencyPhone,
+        notes: notes,
+        paymentStatus: 'Pending Verification'
+      });
+
+      showToast(`Enrollment request submitted for ${child.name}! Awaiting admin review.`, 'success');
+      renderAllUserData();
+      switchUserTab('tab-status');
+    }
+
+    function renderUserEnrollmentsStatusTable() {
+      const store = window.CampStore.getStore();
+      const list = (store.enrollments || []).filter(e => e.parentEmail === 'sarah.adeyemi@example.com' || e.parentName === 'Sarah Adeyemi');
+      const tbody = document.getElementById('userEnrollmentStatusTbody');
+      const emptyState = document.getElementById('userStatusEmptyState');
+
+      if (!list.length) {
+        tbody.innerHTML = '';
+        emptyState.style.display = 'block';
+        return;
+      }
+
+      emptyState.style.display = 'none';
+      tbody.innerHTML = list.map(item => {
+        const statusClass = item.status.toLowerCase();
+        return `
+          <tr>
+            <td><strong style="color: var(--color-green-primary); font-family: monospace;">${item.voucherCode || item.id}</strong></td>
+            <td><strong>${escapeHtml(item.childName)}</strong></td>
+            <td><span style="font-size: 0.85rem;">${escapeHtml(item.trackName)}</span></td>
+            <td>
+              <div style="font-size: 0.78rem;">${escapeHtml(item.sessionName)}</div>
+              <span class="dash-status-badge upcoming" style="font-size: 0.68rem;">${escapeHtml(item.timeSlot)}</span>
+            </td>
+            <td><span style="font-size: 0.78rem; color: var(--color-gray-600);">${item.dateSubmitted || 'Recent'}</span></td>
+            <td>
+              <span class="dash-status-badge ${statusClass}">
+                ${item.status === 'Pending' ? 'Pending Review' : (item.status === 'Approved' ? 'Approved & Confirmed' : 'Declined')}
+              </span>
+            </td>
+            <td><strong>${item.paymentStatus}</strong></td>
+            <td>
+              ${item.status === 'Approved' ? `
+                <button type="button" class="dash-action-btn approve" onclick="openVoucherModal('${item.voucherCode}', '${escapeHtml(item.childName)}', '${escapeHtml(item.trackName)}', '${escapeHtml(item.sessionName)}')">
+                  View Pass
+                </button>
+              ` : `
+                <span style="font-size: 0.75rem; color: var(--color-gray-600);">In review</span>
+              `}
+            </td>
+          </tr>
+        `;
+      }).join('');
+    }
+
+    function openVoucherModal(code, childName, trackName, sessionName) {
+      const content = document.getElementById('voucherModalContent');
+      content.innerHTML = `
+        <div class="dash-user-avatar" style="width: 52px; height: 52px; margin: 0 auto 0.75rem auto; font-size: 1.1rem; background: var(--color-green-primary); color: #ffffff;">PASS</div>
+        <div style="font-size: 0.75rem; font-weight: 800; letter-spacing: 0.1em; color: var(--color-orange-golden); text-transform: uppercase;">
+          CodeCampus International • Abuja
+        </div>
+        <h3 style="font-size: 1.45rem; font-weight: 800; color: var(--color-green-darkest); margin: 0.35rem 0;">
+          CONFIRMED CAMP PASS
+        </h3>
+        <div style="margin: 1.25rem 0; padding: 1rem; border-radius: 12px; background: var(--color-green-subtle); border: 1.5px dashed var(--color-green-primary);">
+          <div style="font-size: 1.25rem; font-weight: 800; color: var(--color-green-darkest);">${childName}</div>
+          <div style="font-size: 0.85rem; font-weight: 700; color: var(--color-green-primary); margin-top: 0.2rem;">${trackName}</div>
+          <div style="font-size: 0.8rem; color: var(--color-gray-600); margin-top: 0.35rem;">${sessionName}</div>
+          <div style="font-family: monospace; font-size: 1.15rem; font-weight: 800; color: #b45309; margin-top: 0.65rem;">
+            ${code}
+          </div>
+        </div>
+        <p style="font-size: 0.78rem; color: var(--color-gray-600); line-height: 1.4;">
+          Please present this digital or printed voucher during check-in at Turing Campus, Maitama District, Abuja.
+        </p>
+      `;
+      document.getElementById('modalVoucherPass').classList.add('active');
+    }
+
+    function closeVoucherModal() {
+      document.getElementById('modalVoucherPass').classList.remove('active');
+    }
+
+    function renderChildScheduleTable(child) {
+      const tbody = document.getElementById('userScheduleTbody');
+      const sampleDays = [
+        { day: 'Mon, Jun 15', topic: 'Intro to Robot Mechanics & DC Motors', room: 'Turing Arena Lab 2', time: '9:00 AM – 12:30 PM', inst: 'Eng. David Okafor', status: 'Attended' },
+        { day: 'Tue, Jun 16', topic: 'Scratch 3.0 Logic Blocks & Sequencing', room: 'Turing Arena Lab 2', time: '9:00 AM – 12:30 PM', inst: 'Sarah K.', status: 'Attended' },
+        { day: 'Wed, Jun 17', topic: 'Ultrasonic Sensor Distance Sensing', room: 'Turing Arena Lab 2', time: '9:00 AM – 12:30 PM', inst: 'Eng. David Okafor', status: 'Attended' },
+        { day: 'Thu, Jun 18', topic: 'Autonomous Rover Obstacle Avoidance', room: 'Turing Arena Lab 2', time: '9:00 AM – 12:30 PM', inst: 'Eng. David Okafor', status: 'Upcoming' },
+        { day: 'Fri, Jun 19', topic: 'Friday Robot Arena Races & Parent Showcase', room: 'Main Auditorium', time: '9:00 AM – 12:30 PM', inst: 'Faculty Team', status: 'Upcoming' }
+      ];
+
+      tbody.innerHTML = sampleDays.map(d => `
+        <tr>
+          <td><strong>${d.day}</strong></td>
+          <td>${d.topic}</td>
+          <td><span style="font-size: 0.8rem; color: var(--color-green-primary); font-weight: 700;">${d.room}</span></td>
+          <td style="font-size: 0.82rem;">${d.time}</td>
+          <td style="font-size: 0.82rem;">${d.inst}</td>
+          <td>
+            <span class="dash-status-badge ${d.status === 'Attended' ? 'approved' : 'upcoming'}">
+              ${d.status === 'Attended' ? 'Present' : 'Scheduled'}
+            </span>
+          </td>
+        </tr>
+      `).join('');
+    }
+
+    function renderUserAnnouncements() {
+      const store = window.CampStore.getStore();
+      const list = store.announcements || [];
+      const container = document.getElementById('userAnnouncementsList');
+
+      container.innerHTML = list.map(a => `
+        <div style="padding: 1rem; border-radius: 12px; border: 1.5px solid rgba(11, 70, 44, 0.12); background: var(--color-gray-50);">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.35rem;">
+            <span class="dash-status-badge ${a.badgeColor === 'yellow' ? 'pending' : 'approved'}">${escapeHtml(a.category)}</span>
+            <span style="font-size: 0.72rem; color: var(--color-gray-400);">${a.date}</span>
+          </div>
+          <h4 style="font-size: 0.95rem; font-weight: 800; color: var(--color-green-darkest); margin-bottom: 0.35rem;">${escapeHtml(a.title)}</h4>
+          <p style="font-size: 0.82rem; color: var(--color-gray-600); line-height: 1.45;">${escapeHtml(a.content)}</p>
+        </div>
+      `).join('');
+    }
+
+    function renderUserEnquiries() {
+      const store = window.CampStore.getStore();
+      const list = (store.enquiries || []).filter(e => e.email === 'sarah.adeyemi@example.com' || e.parentName === 'Sarah Adeyemi');
+      const container = document.getElementById('userPreviousEnquiriesList');
+
+      if (!list.length) {
+        container.innerHTML = '<span style="font-size: 0.78rem; color: var(--color-gray-600);">No prior messages.</span>';
+        return;
+      }
+
+      container.innerHTML = list.map(e => `
+        <div style="padding: 0.85rem; border-radius: 10px; border: 1px solid rgba(11, 70, 44, 0.12); background: #ffffff;">
+          <div style="display: flex; justify-content: space-between; font-size: 0.8rem; font-weight: 700; margin-bottom: 0.25rem;">
+            <span>${escapeHtml(e.subject)}</span>
+            <span class="dash-status-badge ${e.status === 'Resolved' ? 'approved' : 'pending'}" style="font-size: 0.68rem;">${e.status}</span>
+          </div>
+          ${e.response ? `
+            <div style="background: var(--color-green-subtle); padding: 0.5rem 0.65rem; border-radius: 8px; font-size: 0.76rem; color: var(--color-green-darkest); margin-top: 0.4rem;">
+              <strong>Admin:</strong> ${escapeHtml(e.response)}
+            </div>
+          ` : `
+            <div style="font-size: 0.74rem; color: var(--color-gray-600); margin-top: 0.25rem;">Awaiting staff reply...</div>
+          `}
+        </div>
+      `).join('');
+    }
+
+    // Modal Helpers
+    function closeAddChildModal() {
+      document.getElementById('modalAddChild').classList.remove('active');
+    }
+
+    function closeSubmitProjectModal() {
+      document.getElementById('modalSubmitProject').classList.remove('active');
+    }
+
+    // Toast System
+    function showToast(message, type = 'success') {
+      const container = document.getElementById('dashToastContainer');
+      const toast = document.createElement('div');
+      toast.className = `dash-toast ${type}`;
+      toast.innerHTML = `<span style="font-weight: 800; font-size: 0.75rem; letter-spacing: 0.05em; text-transform: uppercase;">${type}:</span> <span>${message}</span>`;
+      container.appendChild(toast);
+
+      setTimeout(() => {
+        toast.style.opacity = '0';
+        toast.style.transform = 'translateY(10px)';
+        setTimeout(() => toast.remove(), 300);
+      }, 3500);
+    }
+
+    function escapeHtml(str) {
+      if (!str) return '';
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+    }
+  </script>
+</body>
+
+</html>

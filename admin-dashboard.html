@@ -1,0 +1,1489 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" data-theme="light">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard | Kids Robotics & Coding Summer Camp 2026</title>
+  <meta name="description"
+    content="Centralized administration portal for Kids Robotics & Coding Summer Camp: enrollments management, student records, session scheduling, capacity, attendance, and project reviews.">
+
+  <!-- Favicon & Fonts -->
+  <link rel="icon" type="image/svg+xml"
+    href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%230b462c'><path d='M12 2a2 2 0 0 1 2 2c0 .74-.4 1.39-1 1.73V7h1a7 7 0 0 1 7 7h1a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-1v1a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-1H2a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1h1a7 7 0 0 1 7-7h1V5.73c-.6-.34-1-.99-1-1.73a2 2 0 0 1 2-2z'/></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet">
+
+  <!-- Core & Dashboard Styles -->
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/dashboard.css">
+</head>
+
+<body>
+  <!-- Mobile Sidebar Backdrop -->
+  <div class="dash-sidebar-backdrop" id="dashSidebarBackdrop"></div>
+
+  <div class="dash-shell">
+    <!-- ======================================================================
+         SIDEBAR NAVIGATION
+         ====================================================================== -->
+    <aside class="dash-sidebar" id="dashSidebar">
+      <div class="dash-sidebar-header">
+        <a href="index.html" class="dash-brand-link" title="Return to Main Website">
+          <div class="dash-brand-badge">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+              <path
+                d="M12 2a2 2 0 0 1 2 2c0 .74-.4 1.39-1 1.73V7h1a7 7 0 0 1 7 7h1a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-1v1a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-1H2a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1h1a7 7 0 0 1 7-7h1V5.73c-.6-.34-1-.99-1-1.73a2 2 0 0 1 2-2zM7.5 13a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zm9 0a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zM10 18h4v1h-4v-1z" />
+            </svg>
+          </div>
+          <div class="dash-brand-titles">
+            <div class="dash-brand-name">Nex<span>Bots</span></div>
+            <div class="dash-portal-tag">CAMP 2026 • ABUJA</div>
+          </div>
+        </a>
+
+        <button type="button" class="dash-sidebar-close" id="dashSidebarClose" aria-label="Close Sidebar" title="Close Sidebar">&times;</button>
+        <div class="dash-portal-role-banner admin">
+          <span>Campus Administration</span>
+          <span class="dash-role-pill">Admin</span>
+        </div>
+      </div>
+
+      <nav class="dash-sidebar-nav">
+        <div class="dash-nav-category">Main Management</div>
+        <button type="button" class="dash-nav-item active" data-tab="tab-overview">
+          <span class="dash-nav-icon" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg></span>
+          <span class="dash-nav-label">Camp Overview</span>
+        </button>
+        <button type="button" class="dash-nav-item" data-tab="tab-enrollments">
+          <span class="dash-nav-icon" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 16 12 14 15 10 15 8 12 2 12"></polyline><path d="M5.45 5.11L2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"></path></svg></span>
+          <span class="dash-nav-label">Enrollment Requests</span>
+          <span class="dash-nav-badge danger" id="adminPendingBadge">3</span>
+        </button>
+        <button type="button" class="dash-nav-item" data-tab="tab-students">
+          <span class="dash-nav-icon" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg></span>
+          <span class="dash-nav-label">Students & Parents</span>
+        </button>
+        <button type="button" class="dash-nav-item" data-tab="tab-programs">
+          <span class="dash-nav-icon" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg></span>
+          <span class="dash-nav-label">Camp Programs</span>
+        </button>
+
+        <div class="dash-nav-category">Operations & Academics</div>
+        <button type="button" class="dash-nav-item" data-tab="tab-sessions">
+          <span class="dash-nav-icon" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg></span>
+          <span class="dash-nav-label">Sessions & Capacity</span>
+        </button>
+        <button type="button" class="dash-nav-item" data-tab="tab-attendance">
+          <span class="dash-nav-icon" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 11 12 14 22 4"></polyline><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path></svg></span>
+          <span class="dash-nav-label">Daily Attendance</span>
+        </button>
+        <button type="button" class="dash-nav-item" data-tab="tab-projects">
+          <span class="dash-nav-icon" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2"></rect><rect x="9" y="9" width="6" height="6"></rect><line x1="9" y1="1" x2="9" y2="4"></line><line x1="15" y1="1" x2="15" y2="4"></line><line x1="9" y1="20" x2="9" y2="23"></line><line x1="15" y1="20" x2="15" y2="23"></line><line x1="20" y1="9" x2="23" y2="9"></line><line x1="20" y1="14" x2="23" y2="14"></line><line x1="1" y1="9" x2="4" y2="9"></line><line x1="1" y1="14" x2="4" y2="14"></line></svg></span>
+          <span class="dash-nav-label">Projects & Badges</span>
+        </button>
+        <button type="button" class="dash-nav-item" data-tab="tab-communications">
+          <span class="dash-nav-icon" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg></span>
+          <span class="dash-nav-label">Bulletins & Inquiries</span>
+        </button>
+      </nav>
+
+      <div class="dash-sidebar-footer">
+        <div class="dash-user-card">
+          <div class="dash-user-avatar">AT</div>
+          <div class="dash-user-meta">
+            <strong>Dr. Alan Turing</strong>
+            <span>Lead Camp Director</span>
+          </div>
+        </div>
+        <button type="button" class="dash-top-btn" id="btnResetDemoData"
+          style="width:100%; justify-content:center; margin-bottom: 0.5rem; background: rgba(255,255,255,0.06); color: #cbd5ce; border-color: rgba(255,255,255,0.15);">
+          Reset Demo Data
+        </button>
+        <a href="user-dashboard.html" class="dash-portal-switch-btn" title="Switch to Parent / User Dashboard">
+          <span>Switch to User Dashboard</span> <span>➔</span>
+        </a>
+        <a href="index.html" class="dash-top-btn"
+          style="width:100%; justify-content:center; background:transparent; color:#cbd5ce; border-color:rgba(255,255,255,0.15);">
+          Return to Website
+        </a>
+      </div>
+    </aside>
+
+    <!-- ======================================================================
+         MAIN CONTENT AREA
+         ====================================================================== -->
+    <main class="dash-main">
+      <!-- Top Navigation Bar -->
+      <header class="dash-topbar">
+        <div class="dash-topbar-left">
+          <button type="button" class="dash-menu-toggle" id="dashMenuToggle" aria-label="Toggle Navigation Menu" title="Toggle Navigation Menu">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="3" y1="6" x2="21" y2="6"></line>
+              <line x1="3" y1="12" x2="21" y2="12"></line>
+              <line x1="3" y1="18" x2="21" y2="18"></line>
+            </svg>
+          </button>
+          <div class="dash-breadcrumb">
+            <h1 class="dash-page-title" id="dashHeaderTitle">
+              <span id="dashHeaderMainTitle">Welcome, Dr. Alan Turing</span>
+              <span id="dashHeaderSubTitle" style="font-size: 0.88rem; font-weight: 700; color: var(--color-green-primary);">• Camp Overview & Analytics</span>
+            </h1>
+          </div>
+        </div>
+
+        <div class="dash-topbar-right">
+          <button type="button" class="dash-top-btn" id="themeToggleBtn" title="Toggle Light / Dark Mode">
+            <span id="themeLabel">Theme</span>
+          </button>
+
+          <button type="button" class="dash-top-btn" id="rtlToggleBtn" title="Toggle RTL Direction">
+            <span>RTL</span>
+          </button>
+        </div>
+      </header>
+
+      <!-- Dashboard Tab Views Container -->
+      <div class="dash-content">
+
+        <!-- Prominent Welcome Message Banner -->
+        <div class="dash-welcome-bar">
+          <div class="dash-welcome-bar-left">
+            <span class="dash-welcome-portal-badge">CAMPUS ADMINISTRATION COMMAND</span>
+            <h2 class="dash-welcome-heading">Welcome back, <span>Dr. Alan Turing</span>!</h2>
+            <p class="dash-welcome-sub">
+              CodeCampus International Kids Robotics & Coding Summer Camp 2026 • 48 Registered Campers across 3 Age Groups
+            </p>
+          </div>
+          <div class="dash-welcome-bar-right">
+            <div class="dash-welcome-chip">
+              <span>Camp Status:</span>
+              <strong>Cohort 1 Active</strong>
+            </div>
+            <div class="dash-welcome-chip">
+              <span>Lab Capacity:</span>
+              <strong>84% Allocated</strong>
+            </div>
+          </div>
+        </div>
+
+        <!-- ==================================================================
+             VIEW 1: OVERVIEW & ANALYTICS
+             ================================================================== -->
+        <section class="dash-tab-pane active" id="tab-overview">
+          <!-- Hero Banner -->
+          <div class="dash-hero-card">
+            <div class="dash-hero-content">
+              <div class="dash-hero-badge">
+                <span class="pulse-dot"></span>
+                <span>Summer 2026 Active • Cohort 1 In Session</span>
+              </div>
+              <h2 class="dash-hero-title">Kids Robotics & Coding <span>Admin Hub</span></h2>
+              <p class="dash-hero-desc">
+                Centralized command center for CodeCampus International. Manage age-appropriate programs (Ages 4–6,
+                7–9, 10–13), approve student registrations, track lab capacities, and review STEM capstones.
+              </p>
+              <div class="dash-hero-actions">
+                <button type="button" class="dash-hero-btn dash-hero-btn-primary"
+                  onclick="switchAdminTab('tab-enrollments')">
+                  <span>Review Pending Requests (<span id="heroPendingCount">3</span>)</span> <span>➔</span>
+                </button>
+                <button type="button" class="dash-hero-btn dash-hero-btn-outline"
+                  onclick="switchAdminTab('tab-programs')">
+                  <span>Explore Programs</span>
+                </button>
+              </div>
+            </div>
+
+            <div class="dash-hero-stats-pill">
+              <div class="dash-pill-row">
+                <span>Active Camp Cohort:</span>
+                <strong>Cohort 1 (June 15–26)</strong>
+              </div>
+              <div class="dash-pill-row">
+                <span>Total Enrolled Campers:</span>
+                <strong id="heroEnrolledCount">42 Kids</strong>
+              </div>
+              <div class="dash-pill-row">
+                <span>Campus Attendance Rate:</span>
+                <strong style="color: #10b981;">96.8%</strong>
+              </div>
+              <div class="dash-pill-row">
+                <span>Lab Stations Ready:</span>
+                <strong>100% Operational</strong>
+              </div>
+            </div>
+          </div>
+
+          <!-- Summary KPI Cards (Clean without emoji icons) -->
+          <div class="dash-kpi-grid">
+            <div class="dash-kpi-card">
+              <div class="dash-kpi-info">
+                <span class="dash-kpi-label">Registered Children</span>
+                <span class="dash-kpi-value" id="kpiTotalKids">48</span>
+                <span class="dash-kpi-sub highlight">↑ 12 new this month</span>
+              </div>
+            </div>
+
+            <div class="dash-kpi-card">
+              <div class="dash-kpi-info">
+                <span class="dash-kpi-label">Active Enrollments</span>
+                <span class="dash-kpi-value" id="kpiActiveEnrollments">42</span>
+                <span class="dash-kpi-sub">Across 4 Summer Sessions</span>
+              </div>
+            </div>
+
+            <div class="dash-kpi-card">
+              <div class="dash-kpi-info">
+                <span class="dash-kpi-label">Pending Requests</span>
+                <span class="dash-kpi-value" id="kpiPendingRequests" style="color:#f59e0b;">3</span>
+                <span class="dash-kpi-sub" style="color:#d97706; font-weight:700;">Requires approval</span>
+              </div>
+            </div>
+
+            <div class="dash-kpi-card">
+              <div class="dash-kpi-info">
+                <span class="dash-kpi-label">Camp Programs</span>
+                <span class="dash-kpi-value">3</span>
+                <span class="dash-kpi-sub">Ages 4–6, 7–9 & 10–13</span>
+              </div>
+            </div>
+
+            <div class="dash-kpi-card">
+              <div class="dash-kpi-info">
+                <span class="dash-kpi-label">Completed Projects</span>
+                <span class="dash-kpi-value">128</span>
+                <span class="dash-kpi-sub highlight">↑ 14 certified today</span>
+              </div>
+            </div>
+
+            <div class="dash-kpi-card">
+              <div class="dash-kpi-info">
+                <span class="dash-kpi-label">Lab Seat Capacity</span>
+                <span class="dash-kpi-value">84%</span>
+                <span class="dash-kpi-sub">50 of 58 seats filled</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Analytics & Visual Distribution Row -->
+          <div class="dash-analytics-row">
+            <!-- Left Card: Program Distribution -->
+            <div class="dash-card">
+              <div class="dash-card-header">
+                <div>
+                  <h3 class="dash-card-title">Enrollment by Program Track</h3>
+                  <p class="dash-card-sub">Student registration breakdown by age tier</p>
+                </div>
+                <button type="button" class="dash-action-btn view" onclick="switchAdminTab('tab-programs')">View
+                  Tracks</button>
+              </div>
+
+              <div class="dash-prog-bar-group">
+                <div class="dash-prog-item">
+                  <div class="dash-prog-labels">
+                    <span class="title">Tiny Tech Adventurers (Ages 4–6: ScratchJr & Lego Duplo)</span>
+                    <span class="stats">14 / 16 Seats (88%)</span>
+                  </div>
+                  <div class="dash-progress-track">
+                    <div class="dash-progress-fill green" style="width: 88%;"></div>
+                  </div>
+                </div>
+
+                <div class="dash-prog-item">
+                  <div class="dash-prog-labels">
+                    <span class="title">Creative Coders & Builders (Ages 7–9: Scratch 3.0 & mBot Neo)</span>
+                    <span class="stats">19 / 22 Seats (86%)</span>
+                  </div>
+                  <div class="dash-progress-track">
+                    <div class="dash-progress-fill yellow" style="width: 86%;"></div>
+                  </div>
+                </div>
+
+                <div class="dash-prog-item">
+                  <div class="dash-prog-labels">
+                    <span class="title">Junior Engineers & Python Pros (Ages 10–13: Python & micro:bit IoT)</span>
+                    <span class="stats">17 / 20 Seats (85%)</span>
+                  </div>
+                  <div class="dash-progress-track">
+                    <div class="dash-progress-fill orange" style="width: 85%;"></div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Quick Cohort Stats Table -->
+              <div style="margin-top: 1.5rem; padding-top: 1.25rem; border-top: 1px solid rgba(11, 70, 44, 0.08);">
+                <div
+                  style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem;">
+                  <strong style="font-size: 0.88rem; color: var(--color-green-darkest);">Session Dates &
+                    Attendance</strong>
+                  <span style="font-size: 0.75rem; color: var(--color-gray-600);">Summer Cohort 1-4</span>
+                </div>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 0.75rem;">
+                  <div
+                    style="background: var(--color-gray-50); padding: 0.75rem; border-radius: 10px; border: 1px solid rgba(11, 70, 44, 0.1);">
+                    <div style="font-size: 0.7rem; color: var(--color-gray-600);">Session 1 (June)</div>
+                    <div style="font-size: 1.1rem; font-weight: 800; color: #10b981;">50 / 58</div>
+                  </div>
+                  <div
+                    style="background: var(--color-gray-50); padding: 0.75rem; border-radius: 10px; border: 1px solid rgba(11, 70, 44, 0.1);">
+                    <div style="font-size: 0.7rem; color: var(--color-gray-600);">Session 2 (July)</div>
+                    <div style="font-size: 1.1rem; font-weight: 800; color: #f59e0b;">44 / 58</div>
+                  </div>
+                  <div
+                    style="background: var(--color-gray-50); padding: 0.75rem; border-radius: 10px; border: 1px solid rgba(11, 70, 44, 0.1);">
+                    <div style="font-size: 0.7rem; color: var(--color-gray-600);">Session 3 (Late July)</div>
+                    <div style="font-size: 1.1rem; font-weight: 800; color: #3b82f6;">38 / 58</div>
+                  </div>
+                  <div
+                    style="background: var(--color-gray-50); padding: 0.75rem; border-radius: 10px; border: 1px solid rgba(11, 70, 44, 0.1);">
+                    <div style="font-size: 0.7rem; color: var(--color-gray-600);">Session 4 (August)</div>
+                    <div style="font-size: 1.1rem; font-weight: 800; color: #8b5cf6;">32 / 58</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Right Card: Urgent Pending Registrations Widget -->
+            <div class="dash-card">
+              <div class="dash-card-header">
+                <div>
+                  <h3 class="dash-card-title">Urgent Review</h3>
+                  <p class="dash-card-sub">Pending parent enrollment requests</p>
+                </div>
+                <span class="dash-status-badge pending" id="overviewPendingBadge">3 Pending</span>
+              </div>
+
+              <div id="overviewPendingList" style="display: flex; flex-direction: column; gap: 0.85rem;">
+                <!-- Dynamically injected pending items -->
+              </div>
+
+              <button type="button" class="dash-hero-btn dash-hero-btn-primary"
+                style="margin-top: 1.25rem; width: 100%; justify-content: center;"
+                onclick="switchAdminTab('tab-enrollments')">
+                View All Enrollment Requests
+              </button>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==================================================================
+             VIEW 2: ENROLLMENT REQUESTS (APPROVE / REJECT WITH CONFIRMATION)
+             ================================================================== -->
+        <section class="dash-tab-pane" id="tab-enrollments">
+          <div class="dash-card" style="margin-bottom: 1.5rem;">
+            <div class="dash-card-header">
+              <div>
+                <h2 class="dash-card-title">Camp Enrollment Requests Management</h2>
+                <p class="dash-card-sub">Review incoming child registration applications, verify prerequisites, and
+                  approve cohort seats</p>
+              </div>
+              <div style="display: flex; gap: 0.5rem;">
+                <button type="button" class="dash-action-btn approve" id="btnApproveAllPending">
+                  Approve All Pending
+                </button>
+              </div>
+            </div>
+
+            <!-- Filters & Search Controls -->
+            <div class="dash-table-controls">
+              <div class="dash-filter-group">
+                <input type="text" id="filterEnrSearch" class="dash-table-input"
+                  placeholder="Search child, parent, voucher..." style="min-width: 220px;">
+
+                <select id="filterEnrStatus" class="dash-filter-select">
+                  <option value="ALL">All Statuses</option>
+                  <option value="Pending" selected>Pending Review (Requires Action)</option>
+                  <option value="Approved">Approved & Confirmed</option>
+                  <option value="Rejected">Rejected</option>
+                </select>
+
+                <select id="filterEnrTrack" class="dash-filter-select">
+                  <option value="ALL">All Age Tracks</option>
+                  <option value="TINY_TECH">Tiny Tech (Ages 4–6)</option>
+                  <option value="CREATIVE_CODERS">Creative Coders (Ages 7–9)</option>
+                  <option value="JUNIOR_ENGINEERS">Junior Engineers (Ages 10–13)</option>
+                </select>
+              </div>
+
+              <div style="font-size: 0.82rem; font-weight: 700; color: var(--color-gray-600);">
+                Showing <span id="enrRecordCount">0</span> records
+              </div>
+            </div>
+
+            <!-- Enrollments Table -->
+            <div class="dash-table-container">
+              <table class="dash-table" id="adminEnrollmentsTable">
+                <thead>
+                  <tr>
+                    <th>Req ID</th>
+                    <th>Child Name & Age</th>
+                    <th>Parent & Contact</th>
+                    <th>Track & Age Group</th>
+                    <th>Session Slot</th>
+                    <th>Status</th>
+                    <th>Tuition</th>
+                    <th>Action Controls</th>
+                  </tr>
+                </thead>
+                <tbody id="adminEnrollmentsTbody">
+                  <!-- Injected via JavaScript -->
+                </tbody>
+              </table>
+            </div>
+
+            <!-- Empty State for Table -->
+            <div class="dash-empty-state" id="enrEmptyState" style="display: none;">
+              <span class="dash-empty-icon" style="font-size: 1rem; font-weight: 800; letter-spacing: 0.05em;">NO RECORDS</span>
+              <h4 class="dash-empty-title">No matching enrollment requests</h4>
+              <p class="dash-empty-desc">Try clearing the search query or status filters to view historical
+                registrations.</p>
+              <button type="button" class="dash-action-btn view" onclick="resetEnrFilters()">Clear Filters</button>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==================================================================
+             VIEW 3: STUDENTS & PARENTS DIRECTORY
+             ================================================================== -->
+        <section class="dash-tab-pane" id="tab-students">
+          <div class="dash-card">
+            <div class="dash-card-header">
+              <div>
+                <h2 class="dash-card-title">Registered Students & Parent Contacts</h2>
+                <p class="dash-card-sub">Complete camp roster with progress indicators, emergency contacts, and dietary
+                  notes</p>
+              </div>
+              <button type="button" class="dash-top-btn" id="btnAddStudentModalBtn">
+                + Add Student Record
+              </button>
+            </div>
+
+            <div class="dash-table-controls">
+              <div class="dash-filter-group">
+                <input type="text" id="filterStudentSearch" class="dash-table-input"
+                  placeholder="Search student or parent name..." style="min-width: 240px;">
+                <select id="filterStudentAge" class="dash-filter-select">
+                  <option value="ALL">All Ages</option>
+                  <option value="4-6">Ages 4–6 (Tiny Tech)</option>
+                  <option value="7-9">Ages 7–9 (Creative Coders)</option>
+                  <option value="10-13">Ages 10–13 (Junior Engineers)</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="dash-table-container">
+              <table class="dash-table">
+                <thead>
+                  <tr>
+                    <th>Student ID</th>
+                    <th>Child Name</th>
+                    <th>Age</th>
+                    <th>Parent Name</th>
+                    <th>Emergency Phone</th>
+                    <th>Track</th>
+                    <th>Progress</th>
+                    <th>Attendance</th>
+                    <th>Badges</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="adminStudentsTbody">
+                  <!-- Injected via JavaScript -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==================================================================
+             VIEW 4: CAMP PROGRAMS & TRACKS (AGES 4-6, 7-9, 10-13)
+             ================================================================== -->
+        <section class="dash-tab-pane" id="tab-programs">
+          <div class="dash-card" style="margin-bottom: 2rem;">
+            <div class="dash-card-header">
+              <div>
+                <h2 class="dash-card-title">Robotics & Coding Camp Curriculum by Age Group</h2>
+                <p class="dash-card-sub">Manage course tracks, lab allocations, syllabus modules, and cohort limits</p>
+              </div>
+            </div>
+
+            <div class="dash-track-selector-cards" id="adminProgramsGrid">
+              <!-- Dynamically rendered program cards -->
+            </div>
+          </div>
+        </section>
+
+        <!-- ==================================================================
+             VIEW 5: SESSIONS & CAPACITY MANAGEMENT
+             ================================================================== -->
+        <section class="dash-tab-pane" id="tab-sessions">
+          <div class="dash-card">
+            <div class="dash-card-header">
+              <div>
+                <h2 class="dash-card-title">Camp Sessions, Cohorts & Seat Capacity</h2>
+                <p class="dash-card-sub">2-week intensive cohorts across June, July, and August 2026</p>
+              </div>
+            </div>
+
+            <div class="dash-table-container">
+              <table class="dash-table">
+                <thead>
+                  <tr>
+                    <th>Cohort / Session</th>
+                    <th>Calendar Dates</th>
+                    <th>Time Slots</th>
+                    <th>Seat Capacity</th>
+                    <th>Enrolled</th>
+                    <th>Available Seats</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody id="adminSessionsTbody">
+                  <!-- Dynamically rendered -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==================================================================
+             VIEW 6: DAILY ATTENDANCE TRACKER
+             ================================================================== -->
+        <section class="dash-tab-pane" id="tab-attendance">
+          <div class="dash-card">
+            <div class="dash-card-header">
+              <div>
+                <h2 class="dash-card-title">Daily Session Attendance Roster</h2>
+                <p class="dash-card-sub">Real-time check-in logging for robotics laboratories and programming arena</p>
+              </div>
+              <button type="button" class="dash-action-btn approve" id="btnMarkAllPresent">
+                Mark All Present Today
+              </button>
+            </div>
+
+            <div class="dash-table-container">
+              <table class="dash-table">
+                <thead>
+                  <tr>
+                    <th>Student Name</th>
+                    <th>Track</th>
+                    <th>Session Slot</th>
+                    <th>Check-in Time</th>
+                    <th>Status</th>
+                    <th>Notes</th>
+                    <th>Quick Status Toggle</th>
+                  </tr>
+                </thead>
+                <tbody id="adminAttendanceTbody">
+                  <!-- Injected via JavaScript -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==================================================================
+             VIEW 7: STUDENT PROJECTS & BADGE AWARDS
+             ================================================================== -->
+        <section class="dash-tab-pane" id="tab-projects">
+          <div class="dash-card">
+            <div class="dash-card-header">
+              <div>
+                <h2 class="dash-card-title">Student Project Submissions & Skill Badges</h2>
+                <p class="dash-card-sub">Evaluate robot prototypes, review Scratch/Python code, and award achievement
+                  badges</p>
+              </div>
+              <button type="button" class="dash-top-btn" id="btnOpenAwardBadgeModal">
+                Award Skill Badge
+              </button>
+            </div>
+
+            <div class="dash-projects-grid" id="adminProjectsGrid">
+              <!-- Dynamically populated -->
+            </div>
+          </div>
+        </section>
+
+        <!-- ==================================================================
+             VIEW 8: BULLETINS & PARENT INQUIRIES
+             ================================================================== -->
+        <section class="dash-tab-pane" id="tab-communications">
+          <div class="dash-analytics-row">
+            <!-- Left: Publish Bulletin -->
+            <div class="dash-card">
+              <div class="dash-card-header">
+                <div>
+                  <h3 class="dash-card-title">Post Camp Announcement</h3>
+                  <p class="dash-card-sub">Broadcast updates to all parent portals</p>
+                </div>
+              </div>
+
+              <form id="formNewAnnouncement">
+                <div class="dash-form-group" style="margin-bottom: 1rem;">
+                  <label class="dash-form-label">Announcement Title</label>
+                  <input type="text" id="annTitle" class="dash-form-input"
+                    placeholder="e.g. Robot Obstacle Race Scheduled for Thursday" required>
+                </div>
+
+                <div class="dash-form-grid">
+                  <div class="dash-form-group">
+                    <label class="dash-form-label">Category</label>
+                    <select id="annCategory" class="dash-form-select">
+                      <option value="Camp Event">Camp Event</option>
+                      <option value="Lab Equipment">Lab Equipment</option>
+                      <option value="Showcase">Student Showcase</option>
+                      <option value="Safety Notice">Safety Notice</option>
+                    </select>
+                  </div>
+                  <div class="dash-form-group">
+                    <label class="dash-form-label">Accent Color</label>
+                    <select id="annBadgeColor" class="dash-form-select">
+                      <option value="green">Forest Green</option>
+                      <option value="yellow">Bright Yellow</option>
+                      <option value="orange">Golden Orange</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="dash-form-group" style="margin-bottom: 1.25rem;">
+                  <label class="dash-form-label">Message Content</label>
+                  <textarea id="annContent" class="dash-form-textarea" rows="3"
+                    placeholder="Provide detailed instructions or updates for parents..." required></textarea>
+                </div>
+
+                <button type="submit" class="dash-hero-btn dash-hero-btn-primary" style="width: 100%;">
+                  Publish Announcement to Parent Portals
+                </button>
+              </form>
+
+              <!-- Live Bulletins List -->
+              <div style="margin-top: 2rem;">
+                <h4 style="font-size: 0.95rem; font-weight: 800; margin-bottom: 0.85rem; color: #062b1b;">Live Camp
+                  Bulletins</h4>
+                <div id="adminAnnouncementsList" style="display: flex; flex-direction: column; gap: 0.85rem;">
+                  <!-- Injected via JavaScript -->
+                </div>
+              </div>
+            </div>
+
+            <!-- Right: Parent Inquiries Inbox -->
+            <div class="dash-card">
+              <div class="dash-card-header">
+                <div>
+                  <h3 class="dash-card-title">Parent Enquiries Inbox</h3>
+                  <p class="dash-card-sub">Direct parent queries regarding camp details</p>
+                </div>
+              </div>
+
+              <div id="adminEnquiriesList" style="display: flex; flex-direction: column; gap: 1rem;">
+                <!-- Injected via JavaScript -->
+              </div>
+            </div>
+          </div>
+        </section>
+
+      </div>
+    </main>
+  </div>
+
+  <!-- ======================================================================
+       MODALS: CONFIRMATIONS & FORMS
+       ====================================================================== -->
+  <!-- Enrollment Action Confirmation Modal -->
+  <div class="dash-modal-backdrop" id="modalEnrConfirm">
+    <div class="dash-modal-box">
+      <div class="dash-modal-header">
+        <h3 class="dash-modal-title" id="modalConfirmTitle">Confirm Action</h3>
+        <button type="button" class="dash-modal-close" onclick="closeConfirmModal()">&times;</button>
+      </div>
+      <div class="dash-modal-body">
+        <p id="modalConfirmMessage" style="font-size: 0.95rem; line-height: 1.5; color: var(--color-gray-700);">
+          Are you sure you want to proceed with this enrollment update?
+        </p>
+        <div id="modalConfirmDetails"
+          style="margin-top: 1rem; padding: 1rem; border-radius: 12px; background: var(--color-gray-100); font-size: 0.85rem;">
+        </div>
+      </div>
+      <div class="dash-modal-footer">
+        <button type="button" class="dash-top-btn" onclick="closeConfirmModal()">Cancel</button>
+        <button type="button" class="dash-hero-btn dash-hero-btn-primary" id="btnModalConfirmAction">Confirm</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Award Badge Modal -->
+  <div class="dash-modal-backdrop" id="modalAwardBadge">
+    <div class="dash-modal-box">
+      <div class="dash-modal-header">
+        <h3 class="dash-modal-title">Award Skill Badge</h3>
+        <button type="button" class="dash-modal-close" onclick="closeAwardBadgeModal()">&times;</button>
+      </div>
+      <div class="dash-modal-body">
+        <form id="formAwardBadge">
+          <div class="dash-form-group" style="margin-bottom: 1rem;">
+            <label class="dash-form-label">Select Student</label>
+            <select id="badgeStudentSelect" class="dash-form-select" required>
+              <option value="KID-101">Liam Adeyemi (Creative Coders)</option>
+              <option value="KID-102">Maya Adeyemi (Junior Engineers)</option>
+            </select>
+          </div>
+
+          <div class="dash-form-group" style="margin-bottom: 1rem;">
+            <label class="dash-form-label">Select Achievement Badge</label>
+            <select id="badgeTypeSelect" class="dash-form-select" required>
+              <option value="Rocket Coder|Mastered loops, conditionals, and Scratch event broadcasting">Rocket Coder (Scratch Logic)</option>
+              <option value="Robo Builder|Assembled mBot chassis with ultrasonic sensor">Robo Builder (Hardware Assembly)</option>
+              <option value="Circuit Wizard|Wired breadboard circuits with zero polarity faults">Circuit Wizard (Electronics)</option>
+              <option value="Python Pioneer|Constructed recursive algorithms in Python">Python Pioneer (Syntax Mastery)</option>
+              <option value="Logic Master|Solved complex binary and computational challenges">Logic Master (Algorithmic Puzzles)</option>
+              <option value="Team Leader|Demonstrated stellar collaboration during robot arena hackathon">Team Leader (Collaboration)</option>
+            </select>
+          </div>
+
+          <div class="dash-form-group" style="margin-bottom: 1.25rem;">
+            <label class="dash-form-label">Mentor Commendation Note</label>
+            <textarea id="badgeMentorNote" class="dash-form-textarea" rows="2"
+              placeholder="e.g. Exhibited exceptional debugging precision during today's obstacle avoidance test."
+              required></textarea>
+          </div>
+
+          <button type="submit" class="dash-hero-btn dash-hero-btn-primary" style="width: 100%;">
+            Award Badge & Sync to Parent Cabinet
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Reply Enquiry Modal -->
+  <div class="dash-modal-backdrop" id="modalReplyEnquiry">
+    <div class="dash-modal-box">
+      <div class="dash-modal-header">
+        <h3 class="dash-modal-title">Reply to Parent Inquiry</h3>
+        <button type="button" class="dash-modal-close" onclick="closeReplyEnquiryModal()">&times;</button>
+      </div>
+      <div class="dash-modal-body">
+        <div id="enquiryModalSnippet"
+          style="padding: 0.85rem; background: var(--color-gray-100); border-radius: 10px; font-size: 0.85rem; margin-bottom: 1rem;">
+        </div>
+        <form id="formReplyEnquiry">
+          <input type="hidden" id="replyEnquiryId">
+          <div class="dash-form-group" style="margin-bottom: 1.25rem;">
+            <label class="dash-form-label">Official Response</label>
+            <textarea id="replyText" class="dash-form-textarea" rows="3"
+              placeholder="Type your response to the parent here..." required></textarea>
+          </div>
+          <button type="submit" class="dash-hero-btn dash-hero-btn-primary" style="width: 100%;">
+            Send Response & Mark Resolved
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Container -->
+  <div class="dash-toast-container" id="dashToastContainer"></div>
+
+  <!-- Script Files -->
+  <script src="assets/js/dashboard.js"></script>
+  <script>
+    // =========================================================================
+    // ADMIN DASHBOARD CONTROLLER (Pure Vanilla JavaScript)
+    // =========================================================================
+    let currentEnrAction = null;
+
+    document.addEventListener('DOMContentLoaded', () => {
+      initAdminNavigation();
+      initThemeAndRtl();
+      renderAllAdminData();
+
+      // Listen for data sync events across tabs
+      window.addEventListener('campDataUpdated', () => {
+        renderAllAdminData();
+      });
+
+      // Reset Demo Data
+      document.getElementById('btnResetDemoData').addEventListener('click', () => {
+        if (confirm('Reset demo camp database to fresh default state?')) {
+          window.CampStore.resetStore();
+          showToast('Demo data reset successfully!', 'success');
+          renderAllAdminData();
+        }
+      });
+
+      // Filter change listeners
+      document.getElementById('filterEnrSearch').addEventListener('input', renderEnrollmentsTable);
+      document.getElementById('filterEnrStatus').addEventListener('change', renderEnrollmentsTable);
+      document.getElementById('filterEnrTrack').addEventListener('change', renderEnrollmentsTable);
+
+      document.getElementById('filterStudentSearch').addEventListener('input', renderStudentsTable);
+      document.getElementById('filterStudentAge').addEventListener('change', renderStudentsTable);
+
+      // Approve All Pending shortcut
+      document.getElementById('btnApproveAllPending').addEventListener('click', () => {
+        const store = window.CampStore.getStore();
+        const pending = store.enrollments.filter(e => e.status === 'Pending');
+        if (!pending.length) {
+          showToast('No pending enrollments to approve.', 'warning');
+          return;
+        }
+        if (confirm(`Approve all ${pending.length} pending registration requests?`)) {
+          pending.forEach(p => window.CampStore.updateEnrollmentStatus(p.id, 'Approved'));
+          showToast(`Successfully approved ${pending.length} enrollments!`, 'success');
+          renderAllAdminData();
+        }
+      });
+
+      // Mark All Present shortcut
+      document.getElementById('btnMarkAllPresent').addEventListener('click', () => {
+        const store = window.CampStore.getStore();
+        store.dailyAttendance.forEach(a => a.status = 'Present');
+        window.CampStore.saveStore(store);
+        showToast('All students marked Present for today\'s session!', 'success');
+        renderAttendanceTable();
+      });
+
+      // Forms
+      document.getElementById('formNewAnnouncement').addEventListener('submit', (e) => {
+        e.preventDefault();
+        const title = document.getElementById('annTitle').value.trim();
+        const category = document.getElementById('annCategory').value;
+        const badgeColor = document.getElementById('annBadgeColor').value;
+        const content = document.getElementById('annContent').value.trim();
+
+        if (title && content) {
+          window.CampStore.addAnnouncement({ title, category, badgeColor, content });
+          showToast('Announcement broadcasted to Parent Portals!', 'success');
+          e.target.reset();
+          renderAnnouncements();
+        }
+      });
+
+      // Award Badge Modal
+      document.getElementById('btnOpenAwardBadgeModal').addEventListener('click', () => {
+        document.getElementById('modalAwardBadge').classList.add('active');
+      });
+
+      document.getElementById('formAwardBadge').addEventListener('submit', (e) => {
+        e.preventDefault();
+        const studentId = document.getElementById('badgeStudentSelect').value;
+        const [icon, name, desc] = document.getElementById('badgeTypeSelect').value.split('|');
+        const note = document.getElementById('badgeMentorNote').value.trim();
+
+        window.CampStore.awardBadgeToStudent(studentId, { icon, name, desc, note });
+        showToast(`Awarded ${name} to student! Reflected in Parent Cabinet.`, 'success');
+        closeAwardBadgeModal();
+        renderAllAdminData();
+      });
+
+      // Reply Enquiry Form
+      document.getElementById('formReplyEnquiry').addEventListener('submit', (e) => {
+        e.preventDefault();
+        const id = document.getElementById('replyEnquiryId').value;
+        const reply = document.getElementById('replyText').value.trim();
+        window.CampStore.replyEnquiry(id, reply);
+        showToast('Response sent to parent inquiry!', 'success');
+        closeReplyEnquiryModal();
+        renderEnquiries();
+      });
+    });
+
+    // -------------------------------------------------------------------------
+    // NAVIGATION & TAB SWITCHING
+    // -------------------------------------------------------------------------
+    function initAdminNavigation() {
+      const navItems = document.querySelectorAll('.dash-nav-item');
+      const panes = document.querySelectorAll('.dash-tab-pane');
+      const pageTitle = document.getElementById('dashHeaderTitle');
+
+      const titleMap = {
+        'tab-overview': 'Camp Overview & Analytics',
+        'tab-enrollments': 'Enrollment Requests & Approvals',
+        'tab-students': 'Registered Students & Parent Directory',
+        'tab-programs': 'Camp Programs & Age Tiers',
+        'tab-sessions': 'Sessions Schedule & Lab Capacity',
+        'tab-attendance': 'Daily Attendance Roster',
+        'tab-projects': 'Student Projects & Skill Badges',
+        'tab-communications': 'Bulletins & Parent Inquiries'
+      };
+
+      navItems.forEach(item => {
+        item.addEventListener('click', () => {
+          const tabId = item.getAttribute('data-tab');
+          if (!tabId) return;
+
+          navItems.forEach(n => n.classList.remove('active'));
+          item.classList.add('active');
+
+          panes.forEach(p => p.classList.remove('active'));
+          const target = document.getElementById(tabId);
+          if (target) target.classList.add('active');
+
+          const subTitle = document.getElementById('dashHeaderSubTitle');
+          if (pageTitle) pageTitle.textContent = 'Welcome, Dr. Alan Turing';
+          if (subTitle && titleMap[tabId]) subTitle.textContent = '• ' + titleMap[tabId];
+
+          // Close mobile drawer if open
+          document.getElementById('dashSidebar').classList.remove('open');
+          document.getElementById('dashSidebarBackdrop').classList.remove('open');
+        });
+      });
+
+      // Mobile Menu Toggle & Close
+      const toggle = document.getElementById('dashMenuToggle');
+      const closeBtn = document.getElementById('dashSidebarClose');
+      const sidebar = document.getElementById('dashSidebar');
+      const backdrop = document.getElementById('dashSidebarBackdrop');
+
+      toggle.addEventListener('click', () => {
+        sidebar.classList.toggle('open');
+        backdrop.classList.toggle('open');
+      });
+
+      if (closeBtn) {
+        closeBtn.addEventListener('click', () => {
+          sidebar.classList.remove('open');
+          backdrop.classList.remove('open');
+        });
+      }
+
+      backdrop.addEventListener('click', () => {
+        sidebar.classList.remove('open');
+        backdrop.classList.remove('open');
+      });
+    }
+
+    function switchAdminTab(tabId) {
+      const navItem = document.querySelector(`.dash-nav-item[data-tab="${tabId}"]`);
+      if (navItem) navItem.click();
+    }
+
+    // -------------------------------------------------------------------------
+    // THEME & RTL CONTROLLER
+    // -------------------------------------------------------------------------
+    function initThemeAndRtl() {
+      const html = document.documentElement;
+      const themeBtn = document.getElementById('themeToggleBtn');
+      const themeLabel = document.getElementById('themeLabel');
+      const rtlBtn = document.getElementById('rtlToggleBtn');
+
+      function updateThemeLabelText(theme) {
+        if (!themeLabel) return;
+        const isMobile = window.innerWidth <= 480;
+        if (isMobile) {
+          themeLabel.textContent = theme === 'dark' ? 'Dark' : 'Light';
+        } else {
+          themeLabel.textContent = theme === 'dark' ? 'Theme: Dark' : 'Theme: Light';
+        }
+      }
+
+      // Theme
+      const savedTheme = localStorage.getItem('camp_theme') || 'light';
+      html.setAttribute('data-theme', savedTheme);
+      updateThemeLabelText(savedTheme);
+
+      window.addEventListener('resize', () => {
+        updateThemeLabelText(html.getAttribute('data-theme') || 'light');
+      });
+
+      themeBtn.addEventListener('click', () => {
+        const current = html.getAttribute('data-theme');
+        const next = current === 'dark' ? 'light' : 'dark';
+        html.setAttribute('data-theme', next);
+        localStorage.setItem('camp_theme', next);
+        updateThemeLabelText(next);
+      });
+
+      // RTL
+      const savedDir = localStorage.getItem('camp_direction') || 'ltr';
+      html.setAttribute('dir', savedDir);
+
+      rtlBtn.addEventListener('click', () => {
+        const current = html.getAttribute('dir');
+        const next = current === 'rtl' ? 'ltr' : 'rtl';
+        html.setAttribute('dir', next);
+        localStorage.setItem('camp_direction', next);
+      });
+    }
+
+    // -------------------------------------------------------------------------
+    // DATA RENDERING
+    // -------------------------------------------------------------------------
+    function renderAllAdminData() {
+      const store = window.CampStore.getStore();
+      const enrollments = store.enrollments || [];
+      const pendingCount = enrollments.filter(e => e.status === 'Pending').length;
+      const approvedCount = enrollments.filter(e => e.status === 'Approved').length;
+
+      // Update KPI counters
+      document.getElementById('kpiPendingRequests').textContent = pendingCount;
+      document.getElementById('adminPendingBadge').textContent = pendingCount;
+      const aNotice = document.getElementById('adminNoticeBadge');
+      if (aNotice) aNotice.textContent = pendingCount;
+      document.getElementById('heroPendingCount').textContent = pendingCount;
+      document.getElementById('overviewPendingBadge').textContent = `${pendingCount} Pending`;
+      document.getElementById('kpiActiveEnrollments').textContent = approvedCount;
+      document.getElementById('heroEnrolledCount').textContent = `${approvedCount} Kids`;
+
+      // Render Individual Views
+      renderOverviewPendingList();
+      renderEnrollmentsTable();
+      renderStudentsTable();
+      renderProgramsView();
+      renderSessionsTable();
+      renderAttendanceTable();
+      renderProjectsGrid();
+      renderAnnouncements();
+      renderEnquiries();
+    }
+
+    function renderOverviewPendingList() {
+      const store = window.CampStore.getStore();
+      const pending = store.enrollments.filter(e => e.status === 'Pending').slice(0, 3);
+      const container = document.getElementById('overviewPendingList');
+
+      if (!pending.length) {
+        container.innerHTML = `
+          <div style="text-align: center; padding: 1.5rem 0; color: #10b981; font-weight: 700;">
+            All enrollment requests have been reviewed!
+          </div>
+        `;
+        return;
+      }
+
+      container.innerHTML = pending.map(item => `
+        <div style="padding: 0.85rem; border-radius: 12px; border: 1px solid rgba(245, 158, 11, 0.3); background: var(--color-gray-50); display: flex; justify-content: space-between; align-items: center; gap: 0.75rem;">
+          <div>
+            <div style="font-weight: 800; font-size: 0.88rem; color: var(--color-green-darkest);">${escapeHtml(item.childName)} (Age ${item.age})</div>
+            <div style="font-size: 0.75rem; color: var(--color-gray-600);">${escapeHtml(item.trackName)}</div>
+            <div style="font-size: 0.72rem; color: #b45309; font-weight: 700;">Parent: ${escapeHtml(item.parentName)}</div>
+          </div>
+          <button type="button" class="dash-action-btn approve" onclick="openConfirmModal('${item.id}', 'Approve', '${escapeHtml(item.childName)}', '${escapeHtml(item.trackName)}')">
+            Approve
+          </button>
+        </div>
+      `).join('');
+    }
+
+    function renderEnrollmentsTable() {
+      const store = window.CampStore.getStore();
+      let enrollments = store.enrollments || [];
+
+      const query = document.getElementById('filterEnrSearch').value.toLowerCase().trim();
+      const statusFilter = document.getElementById('filterEnrStatus').value;
+      const trackFilter = document.getElementById('filterEnrTrack').value;
+
+      if (statusFilter !== 'ALL') {
+        enrollments = enrollments.filter(e => e.status === statusFilter);
+      }
+
+      if (trackFilter !== 'ALL') {
+        enrollments = enrollments.filter(e => e.trackId === trackFilter);
+      }
+
+      if (query) {
+        enrollments = enrollments.filter(e =>
+          (e.childName && e.childName.toLowerCase().includes(query)) ||
+          (e.parentName && e.parentName.toLowerCase().includes(query)) ||
+          (e.voucherCode && e.voucherCode.toLowerCase().includes(query)) ||
+          (e.id && e.id.toLowerCase().includes(query))
+        );
+      }
+
+      document.getElementById('enrRecordCount').textContent = enrollments.length;
+      const tbody = document.getElementById('adminEnrollmentsTbody');
+      const emptyState = document.getElementById('enrEmptyState');
+
+      if (!enrollments.length) {
+        tbody.innerHTML = '';
+        emptyState.style.display = 'block';
+        return;
+      }
+
+      emptyState.style.display = 'none';
+      tbody.innerHTML = enrollments.map(item => {
+        const statusClass = item.status.toLowerCase();
+        return `
+          <tr>
+            <td>
+              <strong style="color: var(--color-green-primary); font-family: monospace;">${item.id}</strong>
+              <div style="font-size: 0.7rem; color: var(--color-gray-400);">${item.dateSubmitted || ''}</div>
+            </td>
+            <td>
+              <strong>${escapeHtml(item.childName)}</strong>
+              <div style="font-size: 0.76rem; color: var(--color-gray-600);">Age ${item.age} • ${item.gender || 'Child'}</div>
+            </td>
+            <td>
+              <div>${escapeHtml(item.parentName)}</div>
+              <div style="font-size: 0.74rem; color: var(--color-gray-600);">${escapeHtml(item.parentEmail || '')}</div>
+              <div style="font-size: 0.72rem; color: var(--color-gray-600);">${escapeHtml(item.parentPhone || '')}</div>
+            </td>
+            <td>
+              <strong style="font-size: 0.84rem;">${escapeHtml(item.trackName)}</strong>
+            </td>
+            <td>
+              <div style="font-size: 0.78rem;">${escapeHtml(item.sessionName || 'Session 1 (June)')}</div>
+              <span class="dash-status-badge upcoming" style="font-size: 0.68rem;">${escapeHtml(item.timeSlot || 'Morning')}</span>
+            </td>
+            <td>
+              <span class="dash-status-badge ${statusClass}">
+                ${item.status === 'Pending' ? 'Pending Review' : (item.status === 'Approved' ? 'Approved' : 'Rejected')}
+              </span>
+            </td>
+            <td>
+              <div style="font-size: 0.78rem; font-weight: 700;">${item.paymentStatus || 'Pending'}</div>
+              <div style="font-size: 0.7rem; color: var(--color-gray-400);">${item.voucherCode || ''}</div>
+            </td>
+            <td>
+              <div class="dash-action-btn-group">
+                ${item.status === 'Pending' ? `
+                  <button type="button" class="dash-action-btn approve" onclick="openConfirmModal('${item.id}', 'Approve', '${escapeHtml(item.childName)}', '${escapeHtml(item.trackName)}')">
+                    Approve
+                  </button>
+                  <button type="button" class="dash-action-btn reject" onclick="openConfirmModal('${item.id}', 'Reject', '${escapeHtml(item.childName)}', '${escapeHtml(item.trackName)}')">
+                    Reject
+                  </button>
+                ` : `
+                  <button type="button" class="dash-action-btn view" onclick="alert('Viewing Registration: ${escapeHtml(item.childName)}\\nProgram: ${escapeHtml(item.trackName)}\\nNotes: ${escapeHtml(item.notes || 'None')}\\nEmergency Contact: ${escapeHtml(item.emergencyContact || 'None')}')">
+                    Details
+                  </button>
+                `}
+              </div>
+            </td>
+          </tr>
+        `;
+      }).join('');
+    }
+
+    function resetEnrFilters() {
+      document.getElementById('filterEnrSearch').value = '';
+      document.getElementById('filterEnrStatus').value = 'ALL';
+      document.getElementById('filterEnrTrack').value = 'ALL';
+      renderEnrollmentsTable();
+    }
+
+    function renderStudentsTable() {
+      const store = window.CampStore.getStore();
+      let children = store.children || [];
+      const query = document.getElementById('filterStudentSearch').value.toLowerCase().trim();
+      const ageFilter = document.getElementById('filterStudentAge').value;
+
+      if (ageFilter === '4-6') children = children.filter(c => c.age >= 4 && c.age <= 6);
+      if (ageFilter === '7-9') children = children.filter(c => c.age >= 7 && c.age <= 9);
+      if (ageFilter === '10-13') children = children.filter(c => c.age >= 10 && c.age <= 13);
+
+      if (query) {
+        children = children.filter(c => c.name.toLowerCase().includes(query) || (c.school && c.school.toLowerCase().includes(query)));
+      }
+
+      const tbody = document.getElementById('adminStudentsTbody');
+      tbody.innerHTML = children.map(c => `
+        <tr>
+          <td><strong style="color: var(--color-green-primary); font-family: monospace;">${c.id}</strong></td>
+          <td>
+            <div style="display: flex; align-items: center; gap: 0.5rem;">
+              <div class="dash-user-avatar" style="width: 32px; height: 32px; font-size: 0.75rem;">${escapeHtml(c.avatar || 'ST')}</div>
+              <div>
+                <strong>${escapeHtml(c.name)}</strong>
+                <div style="font-size: 0.72rem; color: var(--color-gray-600);">${escapeHtml(c.school || 'Abuja Prep')}</div>
+              </div>
+            </div>
+          </td>
+          <td><strong>${c.age} yrs</strong></td>
+          <td>Sarah Adeyemi</td>
+          <td style="font-size: 0.8rem;">+234 803 123 4567</td>
+          <td style="font-size: 0.82rem;">${escapeHtml(c.trackName || 'Creative Coders')}</td>
+          <td>
+            <div style="display: flex; align-items: center; gap: 0.5rem;">
+              <div class="dash-progress-track" style="width: 70px;">
+                <div class="dash-progress-fill green" style="width: ${c.progressPct || 0}%;"></div>
+              </div>
+              <span style="font-size: 0.75rem; font-weight: 800;">${c.progressPct || 0}%</span>
+            </div>
+          </td>
+          <td><span class="dash-status-badge approved" style="font-size: 0.72rem;">${c.attendancePct || 95}%</span></td>
+          <td>
+            <div style="display: flex; gap: 0.25rem; flex-wrap: wrap;">
+              ${(c.badges || []).map(b => `<span class="dash-status-badge approved" title="${escapeHtml(b.name)}" style="font-size: 0.68rem; padding: 2px 6px;">${escapeHtml(b.badgeCode || b.name.split(' ').map(w => w[0]).join('').substring(0, 3).toUpperCase())}</span>`).join(' ')}
+            </div>
+          </td>
+          <td>
+            <button type="button" class="dash-action-btn view" onclick="alert('Student: ${escapeHtml(c.name)}\\nInstructor: ${escapeHtml(c.instructor || 'Staff')}\\nFeedback: ${escapeHtml(c.mentorFeedback || 'Doing great!')}')">
+              Card
+            </button>
+          </td>
+        </tr>
+      `).join('');
+    }
+
+    function renderProgramsView() {
+      const store = window.CampStore.getStore();
+      const programs = store.programs || [];
+      const grid = document.getElementById('adminProgramsGrid');
+
+      grid.innerHTML = programs.map(p => `
+        <div class="dash-card">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.65rem;">
+            <span class="dash-track-radio-card track-age-badge" style="margin: 0; background: var(--color-yellow-bright); color: #062b1b;">${escapeHtml(p.ageGroup)}</span>
+            <span class="dash-status-badge ${p.enrolledCount >= p.capacity ? 'rejected' : 'approved'}">${escapeHtml(p.status)}</span>
+          </div>
+          <h3 style="font-size: 1.15rem; font-weight: 800; color: var(--color-green-darkest); margin-bottom: 0.35rem;">${escapeHtml(p.title)}</h3>
+          <p style="font-size: 0.8rem; color: var(--color-gray-600); margin-bottom: 0.85rem;">${escapeHtml(p.subtitle)}</p>
+          <div style="font-size: 0.8rem; color: var(--color-green-medium); margin-bottom: 0.85rem; background: var(--color-green-subtle); padding: 0.4rem 0.6rem; border-radius: 8px;">
+            <strong>Tools:</strong> ${escapeHtml(p.tools)}
+          </div>
+          <div style="display: flex; justify-content: space-between; font-size: 0.82rem; margin-bottom: 0.5rem;">
+            <span>Lead Instructor:</span>
+            <strong>${escapeHtml(p.instructor)}</strong>
+          </div>
+          <div style="display: flex; justify-content: space-between; font-size: 0.82rem; margin-bottom: 0.85rem;">
+            <span>Capacity Utilization:</span>
+            <strong>${p.enrolledCount} / ${p.capacity} Seats</strong>
+          </div>
+          <div class="dash-progress-track" style="margin-bottom: 1rem;">
+            <div class="dash-progress-fill ${p.ageGroup.includes('4') ? 'green' : (p.ageGroup.includes('7') ? 'yellow' : 'orange')}" style="width: ${(p.enrolledCount / p.capacity) * 100}%;"></div>
+          </div>
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-top: auto; padding-top: 0.85rem; border-top: 1px solid rgba(11, 70, 44, 0.08);">
+            <strong style="color: var(--color-orange-golden); font-size: 1.05rem;">${escapeHtml(p.fee)}</strong>
+            <span style="font-size: 0.74rem; color: var(--color-gray-600);">${escapeHtml(p.lab)}</span>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function renderSessionsTable() {
+      const store = window.CampStore.getStore();
+      const sessions = store.sessions || [];
+      const tbody = document.getElementById('adminSessionsTbody');
+
+      tbody.innerHTML = sessions.map(s => `
+        <tr>
+          <td><strong>${escapeHtml(s.name)}</strong></td>
+          <td style="font-size: 0.85rem;">${escapeHtml(s.dates)}</td>
+          <td>
+            <div style="font-size: 0.76rem;">Morning: ${escapeHtml(s.morningSlots)}</div>
+            <div style="font-size: 0.76rem;">Afternoon: ${escapeHtml(s.afternoonSlots)}</div>
+          </td>
+          <td><strong>${s.capacity} seats</strong></td>
+          <td><strong style="color: #10b981;">${s.enrolled}</strong></td>
+          <td><strong style="color: var(--color-orange-golden);">${s.capacity - s.enrolled} seats left</strong></td>
+          <td><span class="dash-status-badge approved">Open for Registration</span></td>
+        </tr>
+      `).join('');
+    }
+
+    function renderAttendanceTable() {
+      const store = window.CampStore.getStore();
+      const list = store.dailyAttendance || [];
+      const tbody = document.getElementById('adminAttendanceTbody');
+
+      tbody.innerHTML = list.map(item => `
+        <tr>
+          <td><strong>${escapeHtml(item.name)}</strong></td>
+          <td style="font-size: 0.82rem;">${escapeHtml(item.track)}</td>
+          <td style="font-size: 0.8rem;">${escapeHtml(item.session)}</td>
+          <td><strong style="font-family: monospace;">${item.timeIn}</strong></td>
+          <td>
+            <span class="dash-status-badge ${item.status === 'Present' ? 'approved' : (item.status === 'Late' ? 'pending' : 'rejected')}">
+              ${item.status}
+            </span>
+          </td>
+          <td style="font-size: 0.78rem; color: var(--color-gray-600);">${escapeHtml(item.notes)}</td>
+          <td>
+            <div class="dash-action-btn-group">
+              <button type="button" class="dash-action-btn approve" onclick="toggleAttendance('${item.studentId}', 'Present')">Present</button>
+              <button type="button" class="dash-action-btn reject" onclick="toggleAttendance('${item.studentId}', 'Absent')">Absent</button>
+            </div>
+          </td>
+        </tr>
+      `).join('');
+    }
+
+    function toggleAttendance(studentId, newStatus) {
+      window.CampStore.updateAttendance(studentId, newStatus);
+      showToast(`Updated attendance status to ${newStatus}`, 'success');
+      renderAttendanceTable();
+    }
+
+    function renderProjectsGrid() {
+      const store = window.CampStore.getStore();
+      const children = store.children || [];
+      const allProjects = [];
+
+      children.forEach(c => {
+        (c.projects || []).forEach(p => {
+          allProjects.push({ ...p, studentName: c.name, studentAge: c.age, track: c.trackName });
+        });
+      });
+
+      const grid = document.getElementById('adminProjectsGrid');
+      grid.innerHTML = allProjects.map(p => `
+        <div class="dash-project-card">
+          <div class="dash-project-header">
+            <div>
+              <span class="dash-project-cat">${escapeHtml(p.category)}</span>
+              <h3 class="dash-project-title">${escapeHtml(p.title)}</h3>
+              <div style="font-size: 0.78rem; color: var(--color-green-primary); font-weight: 700;">Student: ${escapeHtml(p.studentName)} (${p.studentAge} yrs)</div>
+            </div>
+            <span class="dash-status-badge approved">${escapeHtml(p.grade)}</span>
+          </div>
+          <div class="dash-project-tools">${escapeHtml(p.tools)}</div>
+          <p class="dash-project-desc">${escapeHtml(p.desc)}</p>
+          <div class="dash-project-feedback">
+            <strong>Mentor Feedback:</strong> "${escapeHtml(p.mentorNote)}"
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function renderAnnouncements() {
+      const store = window.CampStore.getStore();
+      const list = store.announcements || [];
+      const container = document.getElementById('adminAnnouncementsList');
+
+      container.innerHTML = list.map(a => `
+        <div style="padding: 1rem; border-radius: 12px; border: 1px solid rgba(11, 70, 44, 0.12); background: var(--color-gray-50); display: flex; justify-content: space-between; gap: 0.75rem;">
+          <div>
+            <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.35rem;">
+              <span class="dash-status-badge ${a.badgeColor === 'yellow' ? 'pending' : 'approved'}">${escapeHtml(a.category)}</span>
+              <span style="font-size: 0.72rem; color: var(--color-gray-400);">${a.date}</span>
+            </div>
+            <strong style="font-size: 0.95rem; color: var(--color-green-darkest); display: block; margin-bottom: 0.25rem;">${escapeHtml(a.title)}</strong>
+            <p style="font-size: 0.82rem; color: var(--color-gray-600); line-height: 1.4;">${escapeHtml(a.content)}</p>
+          </div>
+          <button type="button" class="dash-action-btn reject" onclick="deleteAnnouncement('${a.id}')" title="Delete Announcement">Delete</button>
+        </div>
+      `).join('');
+    }
+
+    function deleteAnnouncement(id) {
+      if (confirm('Delete this announcement?')) {
+        window.CampStore.deleteAnnouncement(id);
+        showToast('Announcement removed', 'warning');
+        renderAnnouncements();
+      }
+    }
+
+    function renderEnquiries() {
+      const store = window.CampStore.getStore();
+      const list = store.enquiries || [];
+      const container = document.getElementById('adminEnquiriesList');
+
+      container.innerHTML = list.map(e => `
+        <div style="padding: 1rem; border-radius: 12px; border: 1.5px solid ${e.status === 'Pending' ? '#f59e0b' : 'rgba(11, 70, 44, 0.12)'}; background: #ffffff;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+            <strong>${escapeHtml(e.parentName)}</strong>
+            <span class="dash-status-badge ${e.status === 'Resolved' ? 'approved' : 'pending'}">${e.status}</span>
+          </div>
+          <div style="font-size: 0.85rem; font-weight: 700; color: var(--color-green-darkest); margin-bottom: 0.35rem;">${escapeHtml(e.subject)}</div>
+          <p style="font-size: 0.82rem; color: var(--color-gray-600); line-height: 1.4; margin-bottom: 0.65rem;">"${escapeHtml(e.message)}"</p>
+          ${e.response ? `
+            <div style="background: var(--color-green-subtle); padding: 0.6rem 0.8rem; border-radius: 8px; font-size: 0.78rem; color: var(--color-green-darkest); border-left: 3px solid var(--color-green-primary);">
+              <strong>Admin Response:</strong> ${escapeHtml(e.response)}
+            </div>
+          ` : `
+            <button type="button" class="dash-action-btn view" onclick="openReplyEnquiryModal('${e.id}', '${escapeHtml(e.parentName)}', '${escapeHtml(e.subject)}')">
+              Reply to Parent
+            </button>
+          `}
+        </div>
+      `).join('');
+    }
+
+    // -------------------------------------------------------------------------
+    // CONFIRMATION & DIALOG LOGIC
+    // -------------------------------------------------------------------------
+    function openConfirmModal(enrollmentId, action, childName, trackName) {
+      currentEnrAction = { enrollmentId, action };
+      const modal = document.getElementById('modalEnrConfirm');
+      const title = document.getElementById('modalConfirmTitle');
+      const msg = document.getElementById('modalConfirmMessage');
+      const details = document.getElementById('modalConfirmDetails');
+      const btn = document.getElementById('btnModalConfirmAction');
+
+      title.textContent = `${action} Enrollment Request`;
+      msg.textContent = `Are you sure you want to ${action.toLowerCase()} the registration for ${childName} in ${trackName}?`;
+      details.innerHTML = `
+        <div><strong>Request ID:</strong> ${enrollmentId}</div>
+        <div><strong>Child:</strong> ${childName}</div>
+        <div><strong>Program:</strong> ${trackName}</div>
+        <div><strong>Outcome:</strong> Will immediately update shared camp database and parent dashboard notifications.</div>
+      `;
+
+      if (action === 'Approve') {
+        btn.textContent = 'Approve & Confirm Seat';
+        btn.style.background = '#10b981';
+      } else {
+        btn.textContent = 'Reject Request';
+        btn.style.background = '#ef4444';
+      }
+
+      modal.classList.add('active');
+    }
+
+    function closeConfirmModal() {
+      document.getElementById('modalEnrConfirm').classList.remove('active');
+      currentEnrAction = null;
+    }
+
+    document.getElementById('btnModalConfirmAction').addEventListener('click', () => {
+      if (!currentEnrAction) return;
+      const { enrollmentId, action } = currentEnrAction;
+      const newStatus = action === 'Approve' ? 'Approved' : 'Rejected';
+      window.CampStore.updateEnrollmentStatus(enrollmentId, newStatus);
+      showToast(`Enrollment request ${newStatus.toLowerCase()} successfully!`, newStatus === 'Approved' ? 'success' : 'danger');
+      closeConfirmModal();
+      renderAllAdminData();
+    });
+
+    function closeAwardBadgeModal() {
+      document.getElementById('modalAwardBadge').classList.remove('active');
+    }
+
+    function openReplyEnquiryModal(id, parentName, subject) {
+      document.getElementById('replyEnquiryId').value = id;
+      document.getElementById('enquiryModalSnippet').innerHTML = `
+        <strong>Parent:</strong> ${parentName}<br>
+        <strong>Subject:</strong> ${subject}
+      `;
+      document.getElementById('modalReplyEnquiry').classList.add('active');
+    }
+
+    function closeReplyEnquiryModal() {
+      document.getElementById('modalReplyEnquiry').classList.remove('active');
+    }
+
+    // -------------------------------------------------------------------------
+    // TOAST SYSTEM
+    // -------------------------------------------------------------------------
+    function showToast(message, type = 'success') {
+      const container = document.getElementById('dashToastContainer');
+      const toast = document.createElement('div');
+      toast.className = `dash-toast ${type}`;
+      toast.innerHTML = `<span style="font-weight: 800; font-size: 0.75rem; letter-spacing: 0.05em; text-transform: uppercase;">${type}:</span> <span>${message}</span>`;
+      container.appendChild(toast);
+
+      setTimeout(() => {
+        toast.style.opacity = '0';
+        toast.style.transform = 'translateY(10px)';
+        setTimeout(() => toast.remove(), 300);
+      }, 3500);
+    }
+
+    function escapeHtml(str) {
+      if (!str) return '';
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+    }
+  </script>
+</body>
+
+</html>
